@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getDBConnection } from './firebase'
+import { getDBConnection } from '../infraestructure/firebase'
 
 export interface Item {
   id: string
