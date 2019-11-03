@@ -11,6 +11,7 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
+    "styled-components": "^4.4.1",
     "typescript": "3.6.4"
   },
   "scripts": {
@@ -44,6 +45,7 @@
     "@storybook/addon-links": "^5.2.5",
     "@storybook/addons": "^5.2.5",
     "@storybook/react": "^5.2.5",
+    "@types/styled-components": "^4.1.20",
     "babel-loader": "^8.0.6"
   }
 }
