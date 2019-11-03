@@ -1,8 +1,5 @@
 import React from 'react'
 import { useItems } from './useItems'
-import { initFirebaseApp } from './firebase'
-
-initFirebaseApp()
 
 export const App: React.FC = () => {
   const items = useItems()
