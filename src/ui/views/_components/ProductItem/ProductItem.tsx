@@ -35,28 +35,28 @@ const Wrapper = styled.div<{ checked: boolean }>`
     `}
 `
 
-const DeleteOption = styled(DeleteIcon)`
-  width: ${sizes.large};
-  height: ${sizes.large};
-  padding: ${sizes.small};
-`
-
 const CheckOption: React.FC<{ checked: boolean }> = ({ checked }) => {
   return checked ? <CheckboxOnIcon /> : <CheckboxOffIcon />
 }
 
-const CheckboxOnIcon = styled(CheckboxOnIconSvg)`
+const ItemName = styled.div`
+  flex-grow: 1;
+`
+
+const iconStyles = css`
   width: ${sizes.large};
   height: ${sizes.large};
   padding: ${sizes.small};
+`
+
+const DeleteOption = styled(DeleteIcon)`
+  ${iconStyles};
+`
+
+const CheckboxOnIcon = styled(CheckboxOnIconSvg)`
+  ${iconStyles};
 `
 
 const CheckboxOffIcon = styled(CheckboxOffIconSvg)`
-  width: ${sizes.large};
-  height: ${sizes.large};
-  padding: ${sizes.small};
-`
-
-const ItemName = styled.div`
-  flex-grow: 1;
+  ${iconStyles};
 `
