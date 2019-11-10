@@ -47,7 +47,6 @@ export const ProductList: React.FC = () => {
 
       {checkedProductsFiltered.length > 0 && (
         <>
-          {uncheckedProductFiltered.length > 0 && <Separator />}
           {checkedProductsFiltered.map(product => (
             <ProductItem
               item={product}
