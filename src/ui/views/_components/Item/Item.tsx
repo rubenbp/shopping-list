@@ -22,7 +22,8 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   height: ${sizes.large};
-  padding: ${sizes.extrasmall};
+  padding-top: ${sizes.extrasmall};
+  padding-bottom: ${sizes.extrasmall};
 `
 
 const DeleteOption = styled(DeleteIcon)`

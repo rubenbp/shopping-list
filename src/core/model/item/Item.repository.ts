@@ -28,5 +28,6 @@ function buildItem(doc: firebase.firestore.QueryDocumentSnapshot): Item {
     id: doc.id,
     name: docData.name,
     amount: docData.amount,
+    checked: docData.checked,
   }
 }

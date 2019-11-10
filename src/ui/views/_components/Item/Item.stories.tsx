@@ -11,6 +11,7 @@ const item: Item = {
   id: '1',
   name: 'Manzanas',
   amount: 1,
+  checked: false,
 }
 
 export const index = () => <ItemLine item={item}></ItemLine>
