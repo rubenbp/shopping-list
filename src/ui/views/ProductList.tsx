@@ -4,6 +4,7 @@ import { ProductItem } from './_components/ProductItem/ProductItem'
 import { Separator } from './_components/Separator'
 import { toggleProductCheck } from '../../core/actions/toggleProductCheck'
 import { deleteProduct } from '../../core/actions/deleteProduct'
+import { addAmount } from '../../core/actions/addAmount'
 
 export const ProductList: React.FC = () => {
   const { checkedProducts, uncheckedProducts, loading } = useProducts()
@@ -20,6 +21,8 @@ export const ProductList: React.FC = () => {
           key={product.id}
           onToggleCheck={() => toggleProductCheck(product)}
           onDelete={() => deleteProduct(product.id)}
+          onAddAmount={() => addAmount(product)}
+          onSubtractAmount={() => console.log('onSubtractAmount')}
         />
       ))}
 
@@ -32,6 +35,8 @@ export const ProductList: React.FC = () => {
               key={product.id}
               onToggleCheck={() => toggleProductCheck(product)}
               onDelete={() => deleteProduct(product.id)}
+              onAddAmount={() => addAmount(product)}
+              onSubtractAmount={() => console.log('onSubtractAmount')}
             />
           ))}
         </>
