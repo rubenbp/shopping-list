@@ -1,4 +1,4 @@
-import { Product } from './Product'
+import { Product, NewProduct } from './Product'
 import { getDBConnection } from '../../infraestructure/firebase'
 
 type Callback = (items: Product[]) => void
@@ -46,4 +46,9 @@ export async function deleteProduct(productId: string) {
     .collection('items')
     .doc(productId)
     .delete()
+}
+
+export async function addProduct(product: NewProduct) {
+  const db = await getDBConnection()
+  return db.collection('items').add(product)
 }

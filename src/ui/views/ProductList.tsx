@@ -7,6 +7,8 @@ import { deleteProduct } from '../../core/actions/deleteProduct'
 import { addAmount } from '../../core/actions/addAmount'
 import { subtractAmount } from '../../core/actions/subtractAmount'
 import { FilterProducts } from './_components/FilterProducts'
+import { addNewProduct } from '../../core/actions/addNewProduct'
+import { NewProductItem } from './_components/NewProductItem'
 
 export const ProductList: React.FC = () => {
   const { checkedProducts, uncheckedProducts, loading } = useProducts()
@@ -26,6 +28,9 @@ export const ProductList: React.FC = () => {
   const uncheckedProductFiltered = uncheckedProducts.filter(
     p => p.name.toLowerCase().indexOf(term.toLowerCase()) !== -1,
   )
+
+  const hasProductFiltered =
+    checkedProductsFiltered.length > 0 || uncheckedProductFiltered.length > 0
 
   return (
     <>
@@ -54,6 +59,10 @@ export const ProductList: React.FC = () => {
             />
           ))}
         </>
+      )}
+
+      {!hasProductFiltered && (
+        <NewProductItem name={term} onAdd={() => addNewProduct(term)} />
       )}
 
       <FilterProducts term={term} onSearch={handleSearch} />
