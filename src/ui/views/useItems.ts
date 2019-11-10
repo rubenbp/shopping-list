@@ -3,7 +3,8 @@ import {
   Item,
   isItemChecked,
   isItemUnchecked,
-} from '../../core/model/item/Item'
+  sortItemsAlphabetical,
+} from '../../core/model/item'
 import { getItems } from '../../core/actions/getItems'
 
 interface ItemsList {
@@ -22,8 +23,10 @@ export const useItems = () => {
   useEffect(() => {
     getItems(items => {
       setItems({
-        checkedItems: items.filter(isItemChecked),
-        uncheckedItems: items.filter(isItemUnchecked),
+        checkedItems: items.filter(isItemChecked).sort(sortItemsAlphabetical),
+        uncheckedItems: items
+          .filter(isItemUnchecked)
+          .sort(sortItemsAlphabetical),
         loading: false,
       })
     })

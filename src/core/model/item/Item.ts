@@ -7,3 +7,6 @@ export interface Item {
 
 export const isItemChecked = (item: Item) => item.checked
 export const isItemUnchecked = (item: Item) => !item.checked
+
+export const sortItemsAlphabetical = (itemA: Item, itemB: Item) =>
+  itemA.name.localeCompare(itemB.name)
