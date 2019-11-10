@@ -42,6 +42,8 @@ const Wrapper = styled.div<{ checked: boolean }>`
   padding-bottom: ${sizes.extrasmall};
   user-select: none;
 
+  background-color: ${p => p.checked && '#eee'};
+
   ${p =>
     p.checked &&
     css`
