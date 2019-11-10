@@ -4,6 +4,7 @@ import { GlobalStyles } from '../theme/GlobalStyles'
 import { ProductItem } from './_components/ProductItem/ProductItem'
 import { Separator } from './_components/Separator'
 import { toggleProductCheck } from '../../core/actions/toggleProductCheck'
+import { deleteProduct } from '../../core/actions/deleteProduct'
 
 export const App: React.FC = () => {
   const {
@@ -30,7 +31,7 @@ export const App: React.FC = () => {
           item={item}
           key={item.id}
           onToggleCheck={() => toggleProductCheck(item)}
-          onDelete={() => console.log('delete', item)}
+          onDelete={() => deleteProduct(item.id)}
         />
       ))}
 
@@ -42,7 +43,7 @@ export const App: React.FC = () => {
               item={item}
               key={item.id}
               onToggleCheck={() => toggleProductCheck(item)}
-              onDelete={() => console.log('delete', item)}
+              onDelete={() => deleteProduct(item.id)}
             />
           ))}
         </>

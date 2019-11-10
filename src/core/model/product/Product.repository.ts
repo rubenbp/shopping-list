@@ -39,3 +39,11 @@ export async function updateProduct(productId: string, fields: object) {
     .doc(productId)
     .update(fields)
 }
+
+export async function deleteProduct(productId: string) {
+  const db = await getDBConnection()
+  return db
+    .collection('items')
+    .doc(productId)
+    .delete()
+}
