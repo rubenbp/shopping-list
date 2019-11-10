@@ -2,28 +2,21 @@ import * as React from 'react'
 import styled, { css } from 'styled-components/macro'
 import { sizes } from '../../../theme/size'
 import { ReactComponent as ClearIconSvg } from './clear.svg'
-import { useState } from 'react'
 
 interface Props {
-  onSearch: (text: string) => void
+  term: string
+  onSearch: (term: string) => void
 }
 
-export const FilterProducts: React.FC<Props> = ({ onSearch }) => {
-  const [text, setText] = useState('')
-
-  const handleSearch = (text: string) => {
-    setText(text)
-    onSearch(text)
-  }
-
+export const FilterProducts: React.FC<Props> = ({ term, onSearch }) => {
   return (
     <Wrapper>
       <Input
         type="text"
-        value={text}
-        onChange={event => handleSearch(event.target.value)}
+        value={term}
+        onChange={event => onSearch(event.target.value)}
       />
-      <ClearIcon onClick={() => handleSearch('')} />
+      <ClearIcon onClick={() => onSearch('')} />
     </Wrapper>
   )
 }
@@ -37,6 +30,7 @@ const Wrapper = styled.div`
   display: flex;
   height: ${sizes.large};
   box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background-color: white;
 `
 
 const Input = styled.input`

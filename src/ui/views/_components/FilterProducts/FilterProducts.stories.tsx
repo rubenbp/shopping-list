@@ -7,4 +7,6 @@ export default {
   component: FilterProducts,
 }
 
-export const index = () => <FilterProducts onSearch={action('onSearch')} />
+export const index = () => (
+  <FilterProducts term="demo" onSearch={action('onSearch')} />
+)
