@@ -31,3 +31,11 @@ function buildItem(doc: firebase.firestore.QueryDocumentSnapshot): Product {
     checked: docData.checked,
   }
 }
+
+export async function updateProduct(productId: string, fields: object) {
+  const db = await getDBConnection()
+  return db
+    .collection('items')
+    .doc(productId)
+    .update(fields)
+}
