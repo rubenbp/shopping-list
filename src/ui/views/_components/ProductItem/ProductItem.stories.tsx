@@ -7,11 +7,19 @@ export default {
   component: ItemLine,
 }
 
-const item: Product = {
+const uncheckedItem: Product = {
   id: '1',
   name: 'Manzanas',
   amount: 1,
   checked: false,
 }
 
-export const index = () => <ItemLine item={item}></ItemLine>
+const checkedItem = {
+  id: '1',
+  name: 'Manzanas',
+  amount: 1,
+  checked: true,
+}
+
+export const checked = () => <ItemLine item={checkedItem}></ItemLine>
+export const unchecked = () => <ItemLine item={uncheckedItem}></ItemLine>
