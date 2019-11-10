@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Item } from '../../core/model/item/Item'
+import {
+  Item,
+  isItemChecked,
+  isItemUnchecked,
+} from '../../core/model/item/Item'
 import { getItems } from '../../core/actions/getItems'
 
 interface ItemsList {
@@ -27,6 +31,3 @@ export const useItems = () => {
 
   return items
 }
-
-const isItemChecked = (item: Item) => item.checked
-const isItemUnchecked = (item: Item) => !item.checked
