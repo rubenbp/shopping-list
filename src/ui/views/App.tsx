@@ -1,11 +1,15 @@
 import React from 'react'
-import { useItems } from './useItems'
+import { useProducts } from './useProducts'
 import { GlobalStyles } from '../theme/GlobalStyles'
 import { ProductItem } from './_components/ProductItem/ProductItem'
 import { Separator } from './_components/Separator'
 
 export const App: React.FC = () => {
-  const { checkedItems, uncheckedItems, loading } = useItems()
+  const {
+    checkedProducts: checkedItems,
+    uncheckedProducts: uncheckedItems,
+    loading,
+  } = useProducts()
 
   if (loading) {
     return (

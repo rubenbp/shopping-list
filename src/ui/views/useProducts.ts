@@ -7,22 +7,22 @@ import {
 } from '../../core/model/product'
 import { getProducts } from '../../core/actions/getProducts'
 
-interface ItemsList {
-  checkedItems: Product[]
-  uncheckedItems: Product[]
+interface ProductsList {
+  checkedProducts: Product[]
+  uncheckedProducts: Product[]
   loading: boolean
 }
 
-export const useItems = () => {
-  const [items, setItems] = useState<ItemsList>({
-    checkedItems: [],
-    uncheckedItems: [],
+export const useProducts = () => {
+  const [products, setProducts] = useState<ProductsList>({
+    checkedProducts: [],
+    uncheckedProducts: [],
     loading: true,
   })
 
   useEffect(() => {
     getProducts(items => {
-      const checkedItems = items
+      const checkedProducts = items
         .filter(isProductChecked)
         .sort(sortProductsAlphabetical)
 
@@ -30,13 +30,13 @@ export const useItems = () => {
         .filter(isProductUnchecked)
         .sort(sortProductsAlphabetical)
 
-      setItems({
-        checkedItems,
-        uncheckedItems,
+      setProducts({
+        checkedProducts: checkedProducts,
+        uncheckedProducts: uncheckedItems,
         loading: false,
       })
     })
   }, [])
 
-  return items
+  return products
 }
