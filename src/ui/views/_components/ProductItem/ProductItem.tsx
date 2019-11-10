@@ -1,13 +1,13 @@
 import * as React from 'react'
 import styled from 'styled-components/macro'
 import { sizes } from '../../../theme/size'
-import { Item } from '../../../../core/model/item/Item'
+import { Product } from '../../../../core/model/product/Product'
 import { ReactComponent as DeleteIcon } from './delete.svg'
 import { ReactComponent as CheckboxOnIconSvg } from './check_box.svg'
 // import { ReactComponent as CheckboxOffIconSvg } from './check_box_outline_blank.svg'
 
 interface Props {
-  item: Item
+  item: Product
 }
 
 export const ItemLine: React.FC<Props> = ({ item }) => (

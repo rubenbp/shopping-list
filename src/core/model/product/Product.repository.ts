@@ -1,9 +1,9 @@
-import { Item } from './Item'
+import { Product } from './Product'
 import { getDBConnection } from '../../infraestructure/firebase'
 
-type Callback = (items: Item[]) => void
+type Callback = (items: Product[]) => void
 
-export async function getItems(callback: Callback) {
+export async function getProducts(callback: Callback) {
   const db = await getDBConnection()
 
   db.collection('items').onSnapshot(querySnapshot => {
@@ -13,7 +13,7 @@ export async function getItems(callback: Callback) {
 }
 
 function queryToItems(query: firebase.firestore.QuerySnapshot) {
-  const newItems: Item[] = []
+  const newItems: Product[] = []
 
   query.forEach(doc => {
     newItems.push(buildItem(doc))
@@ -22,7 +22,7 @@ function queryToItems(query: firebase.firestore.QuerySnapshot) {
   return newItems
 }
 
-function buildItem(doc: firebase.firestore.QueryDocumentSnapshot): Item {
+function buildItem(doc: firebase.firestore.QueryDocumentSnapshot): Product {
   const docData = doc.data()
   return {
     id: doc.id,

@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
 import {
-  Item,
-  isItemChecked,
-  isItemUnchecked,
-  sortItemsAlphabetical,
-} from '../../core/model/item'
-import { getItems } from '../../core/actions/getItems'
+  Product,
+  isProductChecked,
+  isProductUnchecked,
+  sortProductsAlphabetical,
+} from '../../core/model/product'
+import { getProducts } from '../../core/actions/getProducts'
 
 interface ItemsList {
-  checkedItems: Item[]
-  uncheckedItems: Item[]
+  checkedItems: Product[]
+  uncheckedItems: Product[]
   loading: boolean
 }
 
@@ -21,14 +21,14 @@ export const useItems = () => {
   })
 
   useEffect(() => {
-    getItems(items => {
+    getProducts(items => {
       const checkedItems = items
-        .filter(isItemChecked)
-        .sort(sortItemsAlphabetical)
+        .filter(isProductChecked)
+        .sort(sortProductsAlphabetical)
 
       const uncheckedItems = items
-        .filter(isItemUnchecked)
-        .sort(sortItemsAlphabetical)
+        .filter(isProductUnchecked)
+        .sort(sortProductsAlphabetical)
 
       setItems({
         checkedItems,

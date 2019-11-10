@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { ItemLine } from './ProductItem'
-import { Item } from '../../../../core/model/item/Item'
+import { Product } from '../../../../core/model/product/Product'
 
 export default {
   title: 'ProductItem',
   component: ItemLine,
 }
 
-const item: Item = {
+const item: Product = {
   id: '1',
   name: 'Manzanas',
   amount: 1,
