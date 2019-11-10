@@ -5,21 +5,31 @@ import { Product } from '../../../../core/model/product/Product'
 import { ReactComponent as DeleteIconSvg } from './delete.svg'
 import { ReactComponent as CheckboxOnIconSvg } from './check_box.svg'
 import { ReactComponent as CheckboxOffIconSvg } from './check_box_outline_blank.svg'
+import { AmountOption } from './AmountOption'
 
 interface Props {
   item: Product
   onToggleCheck: () => void
   onDelete: () => void
+  onAddAmount: () => void
+  onSubtractAmount: () => void
 }
 
 export const ProductItem: React.FC<Props> = ({
   item,
   onToggleCheck,
   onDelete,
+  onAddAmount,
+  onSubtractAmount,
 }) => (
   <Wrapper checked={item.checked}>
     <DeleteOption onClick={onDelete} />
     <ItemName>{item.name}</ItemName>
+    <AmountOption
+      amount={item.amount}
+      onAdd={onAddAmount}
+      onSubtract={onSubtractAmount}
+    />
     <CheckOption checked={item.checked} onClick={onToggleCheck} />
   </Wrapper>
 )

@@ -27,6 +27,8 @@ export const checked = () => (
     item={checkedProduct}
     onToggleCheck={action('onToggleCheck')}
     onDelete={action('onDelete')}
+    onAddAmount={action('onAddMount')}
+    onSubtractAmount={action('onSubtractAmount')}
   ></ProductItem>
 )
 
@@ -35,5 +37,7 @@ export const unchecked = () => (
     item={uncheckedProduct}
     onToggleCheck={action('onToggleCheck')}
     onDelete={action('onDelete')}
+    onAddAmount={action('onAddMount')}
+    onSubtractAmount={action('onSubtractAmount')}
   ></ProductItem>
 )
