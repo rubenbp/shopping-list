@@ -22,11 +22,17 @@ export const useItems = () => {
 
   useEffect(() => {
     getItems(items => {
+      const checkedItems = items
+        .filter(isItemChecked)
+        .sort(sortItemsAlphabetical)
+
+      const uncheckedItems = items
+        .filter(isItemUnchecked)
+        .sort(sortItemsAlphabetical)
+
       setItems({
-        checkedItems: items.filter(isItemChecked).sort(sortItemsAlphabetical),
-        uncheckedItems: items
-          .filter(isItemUnchecked)
-          .sort(sortItemsAlphabetical),
+        checkedItems,
+        uncheckedItems,
         loading: false,
       })
     })
