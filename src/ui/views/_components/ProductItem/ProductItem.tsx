@@ -36,9 +36,9 @@ const Wrapper = styled.div<{ checked: boolean }>`
 `
 
 const DeleteOption = styled(DeleteIcon)`
-  width: ${sizes.medium};
-  height: ${sizes.medium};
-  padding: ${sizes.extrasmall};
+  width: ${sizes.large};
+  height: ${sizes.large};
+  padding: ${sizes.small};
 `
 
 const CheckOption: React.FC<{ checked: boolean }> = ({ checked }) => {
@@ -46,15 +46,15 @@ const CheckOption: React.FC<{ checked: boolean }> = ({ checked }) => {
 }
 
 const CheckboxOnIcon = styled(CheckboxOnIconSvg)`
-  width: ${sizes.medium};
-  height: ${sizes.medium};
-  padding: ${sizes.extrasmall};
+  width: ${sizes.large};
+  height: ${sizes.large};
+  padding: ${sizes.small};
 `
 
 const CheckboxOffIcon = styled(CheckboxOffIconSvg)`
-  width: ${sizes.medium};
-  height: ${sizes.medium};
-  padding: ${sizes.extrasmall};
+  width: ${sizes.large};
+  height: ${sizes.large};
+  padding: ${sizes.small};
 `
 
 const ItemName = styled.div`
