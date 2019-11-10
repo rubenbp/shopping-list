@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { ItemLine } from './Item'
+import { ItemLine } from './ItemList'
 import { Item } from '../../../../core/model/item/Item'
 
 export default {
-  title: 'Item',
+  title: 'ItemList',
   component: ItemLine,
 }
 
