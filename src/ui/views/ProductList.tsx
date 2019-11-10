@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useProducts } from './useProducts'
 import { ProductItem } from './_components/ProductItem/ProductItem'
-import { Separator } from './_components/Separator'
 import { toggleProductCheck } from '../../core/actions/toggleProductCheck'
 import { deleteProduct } from '../../core/actions/deleteProduct'
 import { addAmount } from '../../core/actions/addAmount'
