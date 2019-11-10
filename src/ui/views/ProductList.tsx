@@ -9,6 +9,7 @@ import { subtractAmount } from '../../core/actions/subtractAmount'
 import { FilterProducts } from './_components/FilterProducts'
 import { addNewProduct } from '../../core/actions/addNewProduct'
 import { NewProductItem } from './_components/NewProductItem'
+import { LoadingView } from './_components/LoadingView'
 
 export const ProductList: React.FC = () => {
   const { checkedProducts, uncheckedProducts, loading } = useProducts()
@@ -19,7 +20,7 @@ export const ProductList: React.FC = () => {
   }
 
   if (loading) {
-    return <div>Loading...</div>
+    return <LoadingView />
   }
 
   const checkedProductsFiltered = checkedProducts.filter(
