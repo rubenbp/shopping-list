@@ -21,14 +21,24 @@ export const App: React.FC = () => {
       <GlobalStyles />
 
       {uncheckedItems.map(item => (
-        <ProductItem item={item} key={item.id} />
+        <ProductItem
+          item={item}
+          key={item.id}
+          onToggleCheck={() => console.log('toggle', item)}
+          onDelete={() => console.log('delete', item)}
+        />
       ))}
 
       {checkedItems && (
         <>
           <Separator />
           {checkedItems.map(item => (
-            <ProductItem item={item} key={item.id} />
+            <ProductItem
+              item={item}
+              key={item.id}
+              onToggleCheck={() => console.log('toggle', item)}
+              onDelete={() => console.log('delete', item)}
+            />
           ))}
         </>
       )}

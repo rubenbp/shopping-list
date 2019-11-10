@@ -8,13 +8,19 @@ import { ReactComponent as CheckboxOffIconSvg } from './check_box_outline_blank.
 
 interface Props {
   item: Product
+  onToggleCheck: () => void
+  onDelete: () => void
 }
 
-export const ProductItem: React.FC<Props> = ({ item }) => (
+export const ProductItem: React.FC<Props> = ({
+  item,
+  onToggleCheck,
+  onDelete,
+}) => (
   <Wrapper checked={item.checked}>
-    <DeleteOption />
+    <DeleteOption onClick={onDelete} />
     <ItemName>{item.name}</ItemName>
-    <CheckOption checked={item.checked} />
+    <CheckOption checked={item.checked} onClick={onToggleCheck} />
   </Wrapper>
 )
 
@@ -24,6 +30,7 @@ const Wrapper = styled.div<{ checked: boolean }>`
   height: ${sizes.large};
   padding-top: ${sizes.extrasmall};
   padding-bottom: ${sizes.extrasmall};
+  user-select: none;
 
   ${p =>
     p.checked &&
@@ -35,8 +42,15 @@ const Wrapper = styled.div<{ checked: boolean }>`
     `}
 `
 
-const CheckOption: React.FC<{ checked: boolean }> = ({ checked }) => {
-  return checked ? <CheckboxOnIcon /> : <CheckboxOffIcon />
+const CheckOption: React.FC<{ checked: boolean; onClick: () => void }> = ({
+  checked,
+  onClick,
+}) => {
+  return checked ? (
+    <CheckboxOnIcon onClick={onClick} />
+  ) : (
+    <CheckboxOffIcon onClick={onClick} />
+  )
 }
 
 const ItemName = styled.div`
