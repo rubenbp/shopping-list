@@ -18,8 +18,8 @@ export const useItems = () => {
   useEffect(() => {
     getItems(items => {
       setItems({
-        checkedItems: items.filter(i => i.checked),
-        uncheckedItems: items.filter(i => !i.checked),
+        checkedItems: items.filter(isItemChecked),
+        uncheckedItems: items.filter(isItemUnchecked),
         loading: false,
       })
     })
@@ -27,3 +27,6 @@ export const useItems = () => {
 
   return items
 }
+
+const isItemChecked = (item: Item) => item.checked
+const isItemUnchecked = (item: Item) => !item.checked
