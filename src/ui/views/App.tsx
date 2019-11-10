@@ -1,7 +1,7 @@
 import React from 'react'
 import { useItems } from './useItems'
 import { GlobalStyles } from '../theme/GlobalStyles'
-import { ItemLine } from './_components/ItemList/ItemList'
+import { ItemLine } from './_components/ProductItem/ProductItem'
 
 export const App: React.FC = () => {
   const { checkedItems, uncheckedItems, loading } = useItems()
