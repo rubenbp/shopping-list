@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled, { css } from 'styled-components/macro'
 import { sizes } from '../../../theme/size'
 import { Product } from '../../../../core/model/product/Product'
-import { ReactComponent as DeleteIcon } from './delete.svg'
+import { ReactComponent as DeleteIconSvg } from './delete.svg'
 import { ReactComponent as CheckboxOnIconSvg } from './check_box.svg'
 import { ReactComponent as CheckboxOffIconSvg } from './check_box_outline_blank.svg'
 
@@ -49,7 +49,7 @@ const iconStyles = css`
   padding: ${sizes.small};
 `
 
-const DeleteOption = styled(DeleteIcon)`
+const DeleteOption = styled(DeleteIconSvg)`
   ${iconStyles};
 `
 
