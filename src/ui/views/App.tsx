@@ -1,7 +1,7 @@
 import React from 'react'
 import { useItems } from './useItems'
 import { GlobalStyles } from '../theme/GlobalStyles'
-import { ItemLine } from './_components/ProductItem/ProductItem'
+import { ProductItem } from './_components/ProductItem/ProductItem'
 import { Separator } from './_components/Separator'
 
 export const App: React.FC = () => {
@@ -21,14 +21,14 @@ export const App: React.FC = () => {
       <GlobalStyles />
 
       {uncheckedItems.map(item => (
-        <ItemLine item={item} key={item.id} />
+        <ProductItem item={item} key={item.id} />
       ))}
 
       {checkedItems && (
         <>
           <Separator />
           {checkedItems.map(item => (
-            <ItemLine item={item} key={item.id} />
+            <ProductItem item={item} key={item.id} />
           ))}
         </>
       )}

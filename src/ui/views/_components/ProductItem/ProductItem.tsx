@@ -10,7 +10,7 @@ interface Props {
   item: Product
 }
 
-export const ItemLine: React.FC<Props> = ({ item }) => (
+export const ProductItem: React.FC<Props> = ({ item }) => (
   <Wrapper checked={item.checked}>
     <DeleteOption />
     <ItemName>{item.name}</ItemName>

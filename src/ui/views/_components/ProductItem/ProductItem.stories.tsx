@@ -1,25 +1,27 @@
 import * as React from 'react'
-import { ItemLine } from './ProductItem'
+import { ProductItem } from './ProductItem'
 import { Product } from '../../../../core/model/product/Product'
 
 export default {
   title: 'ProductItem',
-  component: ItemLine,
+  component: ProductItem,
 }
 
-const uncheckedItem: Product = {
+const uncheckedProduct: Product = {
   id: '1',
   name: 'Manzanas',
   amount: 1,
   checked: false,
 }
 
-const checkedItem = {
+const checkedProduct = {
   id: '1',
   name: 'Manzanas',
   amount: 1,
   checked: true,
 }
 
-export const checked = () => <ItemLine item={checkedItem}></ItemLine>
-export const unchecked = () => <ItemLine item={uncheckedItem}></ItemLine>
+export const checked = () => <ProductItem item={checkedProduct}></ProductItem>
+export const unchecked = () => (
+  <ProductItem item={uncheckedProduct}></ProductItem>
+)
