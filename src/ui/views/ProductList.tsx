@@ -14,7 +14,7 @@ export const ProductList: React.FC = () => {
   const { checkedProducts, uncheckedProducts, loading } = useProducts()
   const [term, setTerm] = useState('')
 
-  const handleSearch = (term: string) => {
+  const handleSearch = (term: string): void => {
     setTerm(term)
   }
 
@@ -23,10 +23,10 @@ export const ProductList: React.FC = () => {
   }
 
   const checkedProductsFiltered = checkedProducts.filter(
-    p => p.name.toLowerCase().indexOf(term.toLowerCase()) !== -1,
+    (p) => p.name.toLowerCase().indexOf(term.toLowerCase()) !== -1,
   )
   const uncheckedProductFiltered = uncheckedProducts.filter(
-    p => p.name.toLowerCase().indexOf(term.toLowerCase()) !== -1,
+    (p) => p.name.toLowerCase().indexOf(term.toLowerCase()) !== -1,
   )
 
   const hasProductFiltered =
@@ -34,7 +34,7 @@ export const ProductList: React.FC = () => {
 
   return (
     <>
-      {uncheckedProductFiltered.map(product => (
+      {uncheckedProductFiltered.map((product) => (
         <ProductItem
           item={product}
           key={product.id}
@@ -47,7 +47,7 @@ export const ProductList: React.FC = () => {
 
       {checkedProductsFiltered.length > 0 && (
         <>
-          {checkedProductsFiltered.map(product => (
+          {checkedProductsFiltered.map((product) => (
             <ProductItem
               item={product}
               key={product.id}
