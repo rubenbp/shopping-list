@@ -1,22 +1,13 @@
-import firebase from 'firebase/app';
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-
-import { useSession } from '../hooks/useSession';
-import { LoadingView } from './_components/LoadingView';
-import { ProductList } from './ProductList';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { login } from '../../core/actions/auth'
+import { logout } from '../../core/actions/auth/logout'
+import { useSession } from '../hooks/useSession'
+import { ProductList } from './ProductList'
+import { LoadingView } from './_components/LoadingView'
 
 export const Home = () => {
   const { user, initializing } = useSession()
-
-  function login() {
-    const provider = new firebase.auth.GoogleAuthProvider()
-    firebase.auth().signInWithRedirect(provider)
-  }
-
-  function logout() {
-    firebase.auth().signOut()
-  }
 
   if (initializing) {
     return <LoadingView />
