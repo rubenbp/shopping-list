@@ -1,3 +1,5 @@
+import firebase from 'firebase/app'
+
 const firebaseConfig = {
   apiKey: 'AIzaSyCd6Namyqy3GB2uAcfpRPQrXmQMm15lcq8',
   authDomain: 'rbp-shopping-list-v2.firebaseapp.com',
@@ -9,21 +11,11 @@ const firebaseConfig = {
   measurementId: 'G-DTGXPEE8SL',
 }
 
-/** instancia de firebase */
-let firebase: any
-
-const initFirebaseApp = async () => {
-  if (firebase) return
-
-  firebase = await import(/* webpackChunkName: "firebase" */ 'firebase/app')
-  firebase.initializeApp(firebaseConfig)
-}
+firebase.initializeApp(firebaseConfig)
 
 export const getDBConnection = async (): Promise<
   firebase.firestore.Firestore
 > => {
-  await initFirebaseApp()
   await import(/* webpackChunkName: "firestore" */ 'firebase/firestore')
-
   return firebase.firestore()
 }
