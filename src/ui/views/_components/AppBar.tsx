@@ -11,9 +11,10 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import MenuIcon from '@material-ui/icons/Menu'
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { logout } from '../../../core/actions/auth/logout'
+import { getLists, ItemsList } from '../../../core/actions/lists'
 import { useSession } from '../../hooks/useSession'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,7 +34,14 @@ export const AppBar: React.FC<Props> = (props) => {
   const classes = useStyles()
   const history = useHistory()
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [lists, setLists] = useState<ItemsList[]>([])
   const { user } = useSession()
+
+  useEffect(() => {
+    getLists((lists) => {
+      setLists(lists)
+    })
+  }, [])
 
   function handleLogout() {
     setDrawerOpen(false)
@@ -56,6 +64,11 @@ export const AppBar: React.FC<Props> = (props) => {
         <List>
           {!!user && (
             <>
+              {lists.map((list) => (
+                <ListItem key={list.id} button>
+                  <ListItemText primary={list.name} />
+                </ListItem>
+              ))}
               <ListItem button onClick={goToNewList}>
                 <ListItemIcon>
                   <PlaylistAddIcon />
