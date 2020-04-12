@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
-import { useProducts } from './useProducts'
-import { ProductItem } from './_components/ProductItem/ProductItem'
-import { toggleProductCheck } from '../../core/actions/toggleProductCheck'
-import { deleteProduct } from '../../core/actions/deleteProduct'
+import { useParams } from 'react-router-dom'
 import { addAmount } from '../../core/actions/addAmount'
-import { subtractAmount } from '../../core/actions/subtractAmount'
-import { FilterProducts } from './_components/FilterProducts'
 import { addNewProduct } from '../../core/actions/addNewProduct'
-import { NewProductItem } from './_components/NewProductItem'
+import { deleteProduct } from '../../core/actions/deleteProduct'
+import { subtractAmount } from '../../core/actions/subtractAmount'
+import { toggleProductCheck } from '../../core/actions/toggleProductCheck'
+import { useProducts } from './useProducts'
+import { FilterProducts } from './_components/FilterProducts'
 import { LoadingView } from './_components/LoadingView'
+import { NewProductItem } from './_components/NewProductItem'
+import { ProductItem } from './_components/ProductItem/ProductItem'
 
 export const ProductList: React.FC = () => {
-  const { checkedProducts, uncheckedProducts, loading } = useProducts()
+  const { listId = '' } = useParams()
+  const { checkedProducts, uncheckedProducts, loading } = useProducts(listId)
   const [term, setTerm] = useState('')
 
   const handleSearch = (term: string): void => {
@@ -29,6 +31,11 @@ export const ProductList: React.FC = () => {
     (p) => p.name.toLowerCase().indexOf(term.toLowerCase()) !== -1,
   )
 
+  const handleAddProduct = () => {
+    addNewProduct(listId, term)
+    setTerm('')
+  }
+
   const hasProductFiltered =
     checkedProductsFiltered.length > 0 || uncheckedProductFiltered.length > 0
 
@@ -38,10 +45,10 @@ export const ProductList: React.FC = () => {
         <ProductItem
           item={product}
           key={product.id}
-          onToggleCheck={() => toggleProductCheck(product)}
-          onDelete={() => deleteProduct(product.id)}
-          onAddAmount={() => addAmount(product)}
-          onSubtractAmount={() => subtractAmount(product)}
+          onToggleCheck={() => toggleProductCheck(listId, product)}
+          onDelete={() => deleteProduct(listId, product.id)}
+          onAddAmount={() => addAmount(listId, product)}
+          onSubtractAmount={() => subtractAmount(listId, product)}
         />
       ))}
 
@@ -51,17 +58,17 @@ export const ProductList: React.FC = () => {
             <ProductItem
               item={product}
               key={product.id}
-              onToggleCheck={() => toggleProductCheck(product)}
-              onDelete={() => deleteProduct(product.id)}
-              onAddAmount={() => addAmount(product)}
-              onSubtractAmount={() => subtractAmount(product)}
+              onToggleCheck={() => toggleProductCheck(listId, product)}
+              onDelete={() => deleteProduct(listId, product.id)}
+              onAddAmount={() => addAmount(listId, product)}
+              onSubtractAmount={() => subtractAmount(listId, product)}
             />
           ))}
         </>
       )}
 
       {!hasProductFiltered && (
-        <NewProductItem name={term} onAdd={() => addNewProduct(term)} />
+        <NewProductItem name={term} onAdd={handleAddProduct} />
       )}
 
       <FilterProducts term={term} onSearch={handleSearch} />

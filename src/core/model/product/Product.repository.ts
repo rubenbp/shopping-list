@@ -1,21 +1,24 @@
-import { Product, NewProduct } from './Product'
 import { getDBConnection } from '../../infraestructure/firebase'
+import { NewProduct, Product } from './Product'
 
 type Callback = (items: Product[]) => void
 
-export async function getProducts(callback: Callback) {
+export async function getProducts(listId: string, callback: Callback) {
   const db = await getDBConnection()
 
-  db.collection('items').onSnapshot(querySnapshot => {
-    const items = queryToItems(querySnapshot)
-    callback(items)
-  })
+  db.collection('lists')
+    .doc(listId)
+    .collection('items')
+    .onSnapshot((querySnapshot) => {
+      const items = queryToItems(querySnapshot)
+      callback(items)
+    })
 }
 
 function queryToItems(query: firebase.firestore.QuerySnapshot) {
   const newItems: Product[] = []
 
-  query.forEach(doc => {
+  query.forEach((doc) => {
     newItems.push(buildItem(doc))
   })
 
@@ -32,23 +35,31 @@ function buildItem(doc: firebase.firestore.QueryDocumentSnapshot): Product {
   }
 }
 
-export async function updateProduct(productId: string, fields: object) {
+export async function updateProduct(
+  listId: string,
+  productId: string,
+  fields: object,
+) {
   const db = await getDBConnection()
   return db
+    .collection('lists')
+    .doc(listId)
     .collection('items')
     .doc(productId)
     .update(fields)
 }
 
-export async function deleteProduct(productId: string) {
+export async function deleteProduct(listId: string, productId: string) {
   const db = await getDBConnection()
   return db
+    .collection('lists')
+    .doc(listId)
     .collection('items')
     .doc(productId)
     .delete()
 }
 
-export async function addProduct(product: NewProduct) {
+export async function addProduct(listId: string, product: NewProduct) {
   const db = await getDBConnection()
-  return db.collection('items').add(product)
+  return db.collection('lists').doc(listId).collection('items').add(product)
 }

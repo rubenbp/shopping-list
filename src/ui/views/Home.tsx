@@ -24,9 +24,8 @@ export const Home = () => {
         <Route path="/new-list">
           <NewList />
         </Route>
-        <Route path="/">
-          <ProductList />
-        </Route>
+        <Route path="/lists/:listId" children={<ProductList />} />
+        <Route path="/">Listado de listas</Route>
       </Switch>
     </AppBar>
   )

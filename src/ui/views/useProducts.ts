@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
+import { getProducts } from '../../core/actions/getProducts'
 import {
-  Product,
   isProductChecked,
   isProductUnchecked,
+  Product,
   sortProductsAlphabetical,
 } from '../../core/model/product'
-import { getProducts } from '../../core/actions/getProducts'
 
 interface ProductsList {
   checkedProducts: Product[]
@@ -13,7 +13,7 @@ interface ProductsList {
   loading: boolean
 }
 
-export const useProducts = () => {
+export const useProducts = (listId: string) => {
   const [products, setProducts] = useState<ProductsList>({
     checkedProducts: [],
     uncheckedProducts: [],
@@ -21,7 +21,7 @@ export const useProducts = () => {
   })
 
   useEffect(() => {
-    getProducts(items => {
+    getProducts(listId, (items) => {
       const checkedProducts = items
         .filter(isProductChecked)
         .sort(sortProductsAlphabetical)
@@ -36,7 +36,7 @@ export const useProducts = () => {
         loading: false,
       })
     })
-  }, [])
+  }, [listId])
 
   return products
 }
