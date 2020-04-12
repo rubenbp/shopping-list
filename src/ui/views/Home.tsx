@@ -4,6 +4,7 @@ import { login } from '../../core/actions/auth'
 import { logout } from '../../core/actions/auth/logout'
 import { useSession } from '../hooks/useSession'
 import { ProductList } from './ProductList'
+import { AppBar } from './_components/AppBar'
 import { LoadingView } from './_components/LoadingView'
 
 export const Home = () => {
@@ -22,11 +23,13 @@ export const Home = () => {
   }
 
   return (
-    <Switch>
-      <Route path="/">
-        <span onClick={() => logout()}>Logout</span>
-        <ProductList />
-      </Route>
-    </Switch>
+    <AppBar>
+      <Switch>
+        <Route path="/">
+          <span onClick={() => logout()}>Logout</span>
+          <ProductList />
+        </Route>
+      </Switch>
+    </AppBar>
   )
 }
