@@ -7,11 +7,12 @@ import ListItemText from '@material-ui/core/ListItemText'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import MenuIcon from '@material-ui/icons/Menu'
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd'
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { logout } from '../../../core/actions/auth/logout'
 import { useSession } from '../../hooks/useSession'
 
@@ -30,12 +31,18 @@ interface Props {
 
 export const AppBar: React.FC<Props> = (props) => {
   const classes = useStyles()
+  const history = useHistory()
   const [drawerOpen, setDrawerOpen] = useState(false)
   const { user } = useSession()
 
   function handleLogout() {
     setDrawerOpen(false)
     logout()
+  }
+
+  function goToNewList() {
+    setDrawerOpen(false)
+    history.push('/new-list')
   }
 
   return (
@@ -48,12 +55,20 @@ export const AppBar: React.FC<Props> = (props) => {
       >
         <List>
           {!!user && (
-            <ListItem button onClick={handleLogout}>
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText primary="Desconectarse" />
-            </ListItem>
+            <>
+              <ListItem button onClick={goToNewList}>
+                <ListItemIcon>
+                  <PlaylistAddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Nueva lista" />
+              </ListItem>
+              <ListItem button onClick={handleLogout}>
+                <ListItemIcon>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary="Desconectarse" />
+              </ListItem>
+            </>
           )}
         </List>
       </SwipeableDrawer>
@@ -70,9 +85,9 @@ export const AppBar: React.FC<Props> = (props) => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography className={classes.title} variant="h6" noWrap>
+            {/* <Typography className={classes.title} variant="h6" noWrap>
               Lista de la compra
-            </Typography>
+            </Typography> */}
           </Toolbar>
         </MuiAppBar>
       </ElevationScroll>
