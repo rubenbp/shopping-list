@@ -9,6 +9,7 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Toolbar from '@material-ui/core/Toolbar'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import ListIcon from '@material-ui/icons/List'
 import MenuIcon from '@material-ui/icons/Menu'
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd'
 import React, { useEffect, useState } from 'react'
@@ -53,6 +54,11 @@ export const AppBar: React.FC<Props> = (props) => {
     history.push('/new-list')
   }
 
+  function goToList(list: ItemsList) {
+    setDrawerOpen(false)
+    history.push(`/lists/${list.id}`)
+  }
+
   return (
     <>
       <SwipeableDrawer
@@ -65,7 +71,10 @@ export const AppBar: React.FC<Props> = (props) => {
           {!!user && (
             <>
               {lists.map((list) => (
-                <ListItem key={list.id} button>
+                <ListItem key={list.id} button onClick={() => goToList(list)}>
+                  <ListItemIcon>
+                    <ListIcon />
+                  </ListItemIcon>
                   <ListItemText primary={list.name} />
                 </ListItem>
               ))}
