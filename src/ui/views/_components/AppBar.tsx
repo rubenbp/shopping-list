@@ -1,12 +1,19 @@
 import MuiAppBar from '@material-ui/core/AppBar'
-import CssBaseline from '@material-ui/core/CssBaseline'
 import IconButton from '@material-ui/core/IconButton'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import MenuIcon from '@material-ui/icons/Menu'
-import React from 'react'
+import React, { useState } from 'react'
+import { logout } from '../../../core/actions/auth/logout'
+import { useSession } from '../../hooks/useSession'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,10 +30,34 @@ interface Props {
 
 export const AppBar: React.FC<Props> = (props) => {
   const classes = useStyles()
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const { user } = useSession()
+
+  function handleLogout() {
+    setDrawerOpen(false)
+    logout()
+  }
 
   return (
-    <React.Fragment>
-      <CssBaseline />
+    <>
+      <SwipeableDrawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onOpen={() => setDrawerOpen(true)}
+      >
+        <List>
+          {!!user && (
+            <ListItem button onClick={handleLogout}>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary="Desconectarse" />
+            </ListItem>
+          )}
+        </List>
+      </SwipeableDrawer>
+
       <ElevationScroll {...props}>
         <MuiAppBar>
           <Toolbar>
@@ -35,6 +66,7 @@ export const AppBar: React.FC<Props> = (props) => {
               className={classes.menuButton}
               color="inherit"
               aria-label="open drawer"
+              onClick={() => setDrawerOpen(true)}
             >
               <MenuIcon />
             </IconButton>
@@ -46,7 +78,7 @@ export const AppBar: React.FC<Props> = (props) => {
       </ElevationScroll>
       <Toolbar />
       {props.children}
-    </React.Fragment>
+    </>
   )
 }
 
