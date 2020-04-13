@@ -17,10 +17,9 @@ export const Home = () => {
 
   useEffect(() => {
     getLists(user!, (lists) => {
-      console.log(lists)
       setLists(lists)
     })
-  }, [])
+  }, [user])
 
   return (
     <AppBar title="Tus listas">
