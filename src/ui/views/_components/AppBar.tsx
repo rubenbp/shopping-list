@@ -46,7 +46,7 @@ export const AppBar: React.FC<Props> = (props) => {
   const { user } = useSession()
 
   useEffect(() => {
-    getLists((lists) => {
+    getLists(user!, (lists) => {
       setLists(lists)
     })
   }, [])

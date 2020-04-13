@@ -7,19 +7,17 @@ export interface NewList {
 
 export async function addNewList(currentUser: firebase.User, newList: NewList) {
   const db = await getDBConnection()
-
-  const roles = {
-    [currentUser.email!]: 'owner',
-  }
+  const editors: string[] = [currentUser.email!]
 
   if (newList.sharedWidth.length > 0) {
     newList.sharedWidth.split('\n').forEach((email) => {
-      roles[email] = 'editor'
+      editors.push(email)
     })
   }
 
   return db.collection('lists').add({
     name: newList.name,
-    roles,
+    owner: currentUser.uid,
+    editors,
   })
 }

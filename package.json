@@ -22,8 +22,8 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "deploy": "firebase deploy",
-    "build-deploy": "yarn build && yarn deploy",
+    "upload": "firebase deploy",
+    "deploy": "yarn build && yarn upload",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

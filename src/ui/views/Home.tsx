@@ -7,14 +7,16 @@ import AddIcon from '@material-ui/icons/Add'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getLists, ItemsList } from '../../core/actions/lists'
+import { useSession } from '../hooks/useSession'
 import { AppBar } from './_components/AppBar'
 
 export const Home = () => {
   const [lists, setLists] = useState<ItemsList[] | null>(null)
   const history = useHistory()
+  const { user } = useSession()
 
   useEffect(() => {
-    getLists((lists) => {
+    getLists(user!, (lists) => {
       console.log(lists)
       setLists(lists)
     })
