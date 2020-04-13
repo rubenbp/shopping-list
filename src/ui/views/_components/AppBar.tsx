@@ -1,23 +1,28 @@
 import MuiAppBar from '@material-ui/core/AppBar'
+import Avatar from '@material-ui/core/Avatar'
+import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+import ListSubheader from '@material-ui/core/ListSubheader'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+import AddIcon from '@material-ui/icons/Add'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import ListIcon from '@material-ui/icons/List'
 import MenuIcon from '@material-ui/icons/Menu'
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { logout } from '../../../core/actions/auth/logout'
 import { getLists, ItemsList } from '../../../core/actions/lists'
 import { useSession } from '../../hooks/useSession'
+import GenericAvatarImgUrl from '../../img/avatar.svg'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,9 +77,18 @@ export const AppBar: React.FC<Props> = (props) => {
         onClose={() => setDrawerOpen(false)}
         onOpen={() => setDrawerOpen(true)}
       >
-        <List>
-          {!!user && (
-            <>
+        {!!user && (
+          <>
+            <List dense>
+              <ListItem>
+                <ListItemAvatar>
+                  <Avatar src={user.photoURL || GenericAvatarImgUrl} />
+                </ListItemAvatar>
+                <ListItemText primary={user.displayName} />
+              </ListItem>
+            </List>
+            <Divider />
+            <List subheader={<ListSubheader>LISTAS</ListSubheader>}>
               {lists.map((list) => (
                 <ListItem key={list.id} button onClick={() => goToList(list)}>
                   <ListItemIcon>
@@ -85,19 +99,20 @@ export const AppBar: React.FC<Props> = (props) => {
               ))}
               <ListItem button onClick={goToNewList}>
                 <ListItemIcon>
-                  <PlaylistAddIcon />
+                  <AddIcon />
                 </ListItemIcon>
                 <ListItemText primary="Nueva lista" />
               </ListItem>
+              <Divider />
               <ListItem button onClick={handleLogout}>
                 <ListItemIcon>
                   <ExitToAppIcon />
                 </ListItemIcon>
                 <ListItemText primary="Desconectarse" />
               </ListItem>
-            </>
-          )}
-        </List>
+            </List>
+          </>
+        )}
       </SwipeableDrawer>
 
       <ElevationScroll {...props}>
