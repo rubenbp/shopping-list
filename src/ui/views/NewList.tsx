@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { addNewList } from '../../core/actions/lists/addNewList'
@@ -50,7 +49,6 @@ export const NewList: React.FC = () => {
     <AppBar title="Nueva lista">
       <Container>
         <Box my={2}>
-          <Typography variant="h4">Nueva lista</Typography>
           <form noValidate autoComplete="off">
             <TextField
               className={sytles.field}
