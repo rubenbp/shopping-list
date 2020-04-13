@@ -1,29 +1,52 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { useSession } from '../hooks/useSession'
-import { Login } from './Login'
-import { NewList } from './NewList'
-import { ProductList } from './ProductList'
-import { LoadingView } from './_components/LoadingView'
+import Box from '@material-ui/core/Box'
+import Button from '@material-ui/core/Button'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import AddIcon from '@material-ui/icons/Add'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { getLists, ItemsList } from '../../core/actions/lists'
+import { AppBar } from './_components/AppBar'
 
 export const Home = () => {
-  const { user, initializing } = useSession()
+  const [lists, setLists] = useState<ItemsList[] | null>(null)
+  const history = useHistory()
 
-  if (initializing) {
-    return <LoadingView />
-  }
-
-  if (!user) {
-    return <Login />
-  }
+  useEffect(() => {
+    getLists((lists) => {
+      console.log(lists)
+      setLists(lists)
+    })
+  }, [])
 
   return (
-    <Switch>
-      <Route path="/new-list">
-        <NewList />
-      </Route>
-      <Route path="/lists/:listId" children={<ProductList />} />
-      <Route path="/">Listado de listas</Route>
-    </Switch>
+    <AppBar title="Tus listas">
+      <>
+        {lists && lists.length > 0 && (
+          <List>
+            {lists.map((list) => (
+              <ListItem key={list.id} button>
+                <ListItemText primary={list.name} />
+              </ListItem>
+            ))}
+          </List>
+        )}
+
+        {lists && lists.length === 0 && (
+          <Box justifyContent="center" marginTop={8} display="flex">
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              startIcon={<AddIcon />}
+              onClick={() => history.push('/new-list')}
+            >
+              Crea tu primera lista
+            </Button>
+          </Box>
+        )}
+      </>
+    </AppBar>
   )
 }

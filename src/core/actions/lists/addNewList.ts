@@ -13,7 +13,9 @@ export async function addNewList(currentUser: firebase.User, newList: NewList) {
   }
 
   if (newList.sharedWidth.length > 0) {
-    roles[newList.sharedWidth] = 'editor'
+    newList.sharedWidth.split('\n').forEach((email) => {
+      roles[email] = 'editor'
+    })
   }
 
   return db.collection('lists').add({

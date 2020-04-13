@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { UserProvider } from './infraestructure/UserContext'
 import { GlobalStyles } from './theme/GlobalStyles'
 import './theme/index.css'
-import { Home } from './views/Home'
+import { AppBase } from './views/AppBase'
 
 export const App: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ export const App: React.FC = () => {
       <Router>
         <CssBaseline />
         <GlobalStyles />
-        <Home />
+        <AppBase />
       </Router>
     </UserProvider>
   )

@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   children: React.ReactElement
-  title: string | undefined
+  title?: string | undefined
 }
 
 export const AppBar: React.FC<Props> = (props) => {
@@ -46,7 +46,6 @@ export const AppBar: React.FC<Props> = (props) => {
   const { user } = useSession()
 
   useEffect(() => {
-    console.log('apBar useEffect')
     getLists((lists) => {
       setLists(lists)
     })
@@ -66,8 +65,6 @@ export const AppBar: React.FC<Props> = (props) => {
     setDrawerOpen(false)
     history.push(`/lists/${list.id}`)
   }
-
-  console.log('render')
 
   return (
     <>

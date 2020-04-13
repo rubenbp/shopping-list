@@ -1,10 +1,8 @@
-import './core/infraestructure/firebase';
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import * as serviceWorker from './serviceWorker';
-import { App } from './ui';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './core/infraestructure/firebase'
+import * as serviceWorker from './serviceWorker'
+import { App } from './ui'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

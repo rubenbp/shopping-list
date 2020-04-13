@@ -60,7 +60,8 @@ export const NewList: React.FC = () => {
             <TextField
               className={sytles.field}
               label="Compartir con"
-              helperText="Introduce su @gmail"
+              helperText="Un email por línea"
+              multiline
               value={sharedWith}
               onChange={handleSharedChanged}
               margin="normal"
