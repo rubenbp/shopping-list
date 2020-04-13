@@ -1,6 +1,6 @@
+import { action } from '@storybook/addon-actions'
 import * as React from 'react'
 import { FilterProducts } from './FilterProducts'
-import { action } from '@storybook/addon-actions'
 
 export default {
   title: 'FilterProducts',
@@ -8,5 +8,9 @@ export default {
 }
 
 export const index = () => (
-  <FilterProducts term="demo" onSearch={action('onSearch')} />
+  <FilterProducts
+    term="demo"
+    onSearch={action('onSearch')}
+    onAdd={action('onAdd')}
+  />
 )

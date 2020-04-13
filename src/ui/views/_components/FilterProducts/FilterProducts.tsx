@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { sizes } from '../../../theme/size'
 import { ReactComponent as ClearIconSvg } from './clear.svg'
@@ -6,15 +7,39 @@ import { ReactComponent as ClearIconSvg } from './clear.svg'
 interface Props {
   term: string
   onSearch: (term: string) => void
+  onAdd: () => void
 }
 
-export const FilterProducts: React.FC<Props> = ({ term, onSearch }) => {
+export const FilterProducts: React.FC<Props> = ({ term, onSearch, onAdd }) => {
+  const [hasFocus, setHasFocus] = useState(false)
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onSearch(event.target.value)
+  }
+
+  const handleOnKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.charCode === 13) {
+      onAdd()
+    }
+  }
+
+  const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    if (hasFocus) {
+      event.target.focus()
+    } else {
+      setHasFocus(false)
+    }
+  }
+
   return (
     <Wrapper>
       <Input
         type="text"
         value={term}
-        onChange={event => onSearch(event.target.value)}
+        onChange={handleOnChange}
+        onKeyPress={handleOnKeyPress}
+        onFocus={() => setHasFocus(true)}
+        onBlur={handleOnBlur}
       />
       <ClearIcon onClick={() => onSearch('')} />
     </Wrapper>

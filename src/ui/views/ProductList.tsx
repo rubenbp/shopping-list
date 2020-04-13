@@ -5,6 +5,7 @@ import { addNewProduct } from '../../core/actions/addNewProduct'
 import { deleteProduct } from '../../core/actions/deleteProduct'
 import { subtractAmount } from '../../core/actions/subtractAmount'
 import { toggleProductCheck } from '../../core/actions/toggleProductCheck'
+import { Product } from '../../core/model/product'
 import { useProducts } from './useProducts'
 import { FilterProducts } from './_components/FilterProducts'
 import { LoadingView } from './_components/LoadingView'
@@ -31,6 +32,13 @@ export const ProductList: React.FC = () => {
     (p) => p.name.toLowerCase().indexOf(term.toLowerCase()) !== -1,
   )
 
+  const handleToggleProductCheck = (product: Product) => {
+    toggleProductCheck(listId, product)
+    if (product.checked) {
+      setTerm('')
+    }
+  }
+
   const handleAddProduct = () => {
     addNewProduct(listId, term)
     setTerm('')
@@ -45,7 +53,7 @@ export const ProductList: React.FC = () => {
         <ProductItem
           item={product}
           key={product.id}
-          onToggleCheck={() => toggleProductCheck(listId, product)}
+          onToggleCheck={() => handleToggleProductCheck(product)}
           onDelete={() => deleteProduct(listId, product.id)}
           onAddAmount={() => addAmount(listId, product)}
           onSubtractAmount={() => subtractAmount(listId, product)}
@@ -58,7 +66,7 @@ export const ProductList: React.FC = () => {
             <ProductItem
               item={product}
               key={product.id}
-              onToggleCheck={() => toggleProductCheck(listId, product)}
+              onToggleCheck={() => handleToggleProductCheck(product)}
               onDelete={() => deleteProduct(listId, product.id)}
               onAddAmount={() => addAmount(listId, product)}
               onSubtractAmount={() => subtractAmount(listId, product)}
@@ -71,7 +79,11 @@ export const ProductList: React.FC = () => {
         <NewProductItem name={term} onAdd={handleAddProduct} />
       )}
 
-      <FilterProducts term={term} onSearch={handleSearch} />
+      <FilterProducts
+        term={term}
+        onSearch={handleSearch}
+        onAdd={handleAddProduct}
+      />
     </>
   )
 }
