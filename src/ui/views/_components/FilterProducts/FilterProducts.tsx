@@ -24,7 +24,9 @@ export const FilterProducts: React.FC<Props> = ({ term, onSearch, onAdd }) => {
   }
 
   const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    if (hasFocus) {
+    const hasTerm = term.length > 0
+
+    if (hasFocus && hasTerm) {
       event.target.focus()
     } else {
       setHasFocus(false)
