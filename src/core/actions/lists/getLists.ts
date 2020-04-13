@@ -7,7 +7,6 @@ export interface ItemsList {
 
 export async function getLists(callback: (lists: ItemsList[]) => void) {
   const db = await getDBConnection()
-
   db.collection('lists').onSnapshot((snapshot) => {
     const lists: ItemsList[] = []
     snapshot.forEach((doc) => {

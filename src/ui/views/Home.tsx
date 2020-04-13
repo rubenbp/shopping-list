@@ -4,7 +4,6 @@ import { useSession } from '../hooks/useSession'
 import { Login } from './Login'
 import { NewList } from './NewList'
 import { ProductList } from './ProductList'
-import { AppBar } from './_components/AppBar'
 import { LoadingView } from './_components/LoadingView'
 
 export const Home = () => {
@@ -19,14 +18,12 @@ export const Home = () => {
   }
 
   return (
-    <AppBar>
-      <Switch>
-        <Route path="/new-list">
-          <NewList />
-        </Route>
-        <Route path="/lists/:listId" children={<ProductList />} />
-        <Route path="/">Listado de listas</Route>
-      </Switch>
-    </AppBar>
+    <Switch>
+      <Route path="/new-list">
+        <NewList />
+      </Route>
+      <Route path="/lists/:listId" children={<ProductList />} />
+      <Route path="/">Listado de listas</Route>
+    </Switch>
   )
 }

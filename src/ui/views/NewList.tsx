@@ -8,6 +8,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { addNewList } from '../../core/actions/lists/addNewList'
 import { useSession } from '../hooks/useSession'
+import { AppBar } from './_components/AppBar'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,38 +47,40 @@ export const NewList: React.FC = () => {
   }
 
   return (
-    <Container>
-      <Box my={2}>
-        <Typography variant="h4">Nueva lista</Typography>
-        <form noValidate autoComplete="off">
-          <TextField
-            className={sytles.field}
-            label="Nombre"
-            value={name}
-            onChange={handleNameChanged}
-            margin="normal"
-          />
-          <TextField
-            className={sytles.field}
-            label="Compartir con"
-            helperText="Introduce su @gmail"
-            value={sharedWith}
-            onChange={handleSharedChanged}
-            margin="normal"
-          />
-          <Box marginTop={3}>
-            <Button
-              className={sytles.button}
-              variant="contained"
-              color="primary"
-              onClick={handleNew}
-              disabled={disabledButton}
-            >
-              Crear la lista
-            </Button>
-          </Box>
-        </form>
-      </Box>
-    </Container>
+    <AppBar title="Nueva lista">
+      <Container>
+        <Box my={2}>
+          <Typography variant="h4">Nueva lista</Typography>
+          <form noValidate autoComplete="off">
+            <TextField
+              className={sytles.field}
+              label="Nombre"
+              value={name}
+              onChange={handleNameChanged}
+              margin="normal"
+            />
+            <TextField
+              className={sytles.field}
+              label="Compartir con"
+              helperText="Introduce su @gmail"
+              value={sharedWith}
+              onChange={handleSharedChanged}
+              margin="normal"
+            />
+            <Box marginTop={3}>
+              <Button
+                className={sytles.button}
+                variant="contained"
+                color="primary"
+                onClick={handleNew}
+                disabled={disabledButton}
+              >
+                Crear la lista
+              </Button>
+            </Box>
+          </form>
+        </Box>
+      </Container>
+    </AppBar>
   )
 }

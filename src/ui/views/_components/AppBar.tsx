@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import ListIcon from '@material-ui/icons/List'
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   children: React.ReactElement
+  title: string | undefined
 }
 
 export const AppBar: React.FC<Props> = (props) => {
@@ -39,6 +41,7 @@ export const AppBar: React.FC<Props> = (props) => {
   const { user } = useSession()
 
   useEffect(() => {
+    console.log('apBar useEffect')
     getLists((lists) => {
       setLists(lists)
     })
@@ -58,6 +61,8 @@ export const AppBar: React.FC<Props> = (props) => {
     setDrawerOpen(false)
     history.push(`/lists/${list.id}`)
   }
+
+  console.log('render')
 
   return (
     <>
@@ -107,9 +112,9 @@ export const AppBar: React.FC<Props> = (props) => {
             >
               <MenuIcon />
             </IconButton>
-            {/* <Typography className={classes.title} variant="h6" noWrap>
-              Lista de la compra
-            </Typography> */}
+            <Typography className={classes.title} variant="h6" noWrap>
+              {props.title}
+            </Typography>
           </Toolbar>
         </MuiAppBar>
       </ElevationScroll>
