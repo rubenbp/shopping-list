@@ -26,7 +26,11 @@ export const Home = () => {
         {lists && lists.length > 0 && (
           <List>
             {lists.map((list) => (
-              <ListItem key={list.id} button>
+              <ListItem
+                key={list.id}
+                button
+                onClick={() => history.push(`/lists/${list.id}`)}
+              >
                 <ListItemText primary={list.name} />
               </ListItem>
             ))}
