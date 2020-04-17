@@ -7,6 +7,7 @@ import { getList, List } from '../../core/actions/lists'
 import { subtractAmount } from '../../core/actions/subtractAmount'
 import { toggleProductCheck } from '../../core/actions/toggleProductCheck'
 import { Product } from '../../core/model/product'
+import { useStickyState } from '../hooks/useStickyState'
 import { useProducts } from './useProducts'
 import { AppBar } from './_components/AppBar'
 import { FilterProducts } from './_components/FilterProducts'
@@ -19,7 +20,14 @@ export const ProductList: React.FC = () => {
   const { checkedProducts, uncheckedProducts, loading } = useProducts(listId)
   const [term, setTerm] = useState('')
   const [currentList, setCurrentList] = useState<List>()
+  const [, setDefaultList] = useStickyState(null, 'defaultList')
 
+  // Almacena la lista que está siendo visitada
+  useEffect(() => {
+    setDefaultList(listId)
+  }, [listId, setDefaultList])
+
+  // Obtiene los elementos de la lista
   useEffect(() => {
     getList(listId).then((list) => setCurrentList(list))
   }, [listId])
