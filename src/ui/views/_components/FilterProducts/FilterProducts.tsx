@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useState } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { sizes } from '../../../theme/size'
 import { ReactComponent as ClearIconSvg } from './clear.svg'
@@ -11,7 +10,7 @@ interface Props {
 }
 
 export const FilterProducts: React.FC<Props> = ({ term, onSearch, onAdd }) => {
-  const [hasFocus, setHasFocus] = useState(false)
+  // const [hasFocus, setHasFocus] = useState(false)
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSearch(event.target.value)
@@ -23,15 +22,15 @@ export const FilterProducts: React.FC<Props> = ({ term, onSearch, onAdd }) => {
     }
   }
 
-  const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    const hasTerm = term.length > 0
+  // const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  //   const hasTerm = term.length > 0
 
-    if (hasFocus && hasTerm) {
-      event.target.focus()
-    } else {
-      setHasFocus(false)
-    }
-  }
+  //   if (hasFocus && hasTerm && event.target) {
+  //     event.target.focus()
+  //   } else {
+  //     setHasFocus(false)
+  //   }
+  // }
 
   return (
     <Wrapper>
@@ -40,8 +39,8 @@ export const FilterProducts: React.FC<Props> = ({ term, onSearch, onAdd }) => {
         value={term}
         onChange={handleOnChange}
         onKeyPress={handleOnKeyPress}
-        onFocus={() => setHasFocus(true)}
-        onBlur={handleOnBlur}
+        // onFocus={() => setHasFocus(true)}
+        // onBlur={handleOnBlur}
       />
       <ClearIcon onClick={() => onSearch('')} />
     </Wrapper>

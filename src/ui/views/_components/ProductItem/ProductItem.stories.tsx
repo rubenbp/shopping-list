@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { ProductItem } from './ProductItem'
-import { Product } from '../../../../core/model/product/Product'
 import { action } from '@storybook/addon-actions'
+import * as React from 'react'
+import { Product } from '../../../../core/model/product/Product'
+import { ProductItem } from './ProductItem'
 
 export default {
   title: 'ProductItem',
@@ -27,8 +27,7 @@ export const checked = () => (
     item={checkedProduct}
     onToggleCheck={action('onToggleCheck')}
     onDelete={action('onDelete')}
-    onAddAmount={action('onAddMount')}
-    onSubtractAmount={action('onSubtractAmount')}
+    onSetAmount={action('onSetAmount')}
   ></ProductItem>
 )
 
@@ -37,7 +36,6 @@ export const unchecked = () => (
     item={uncheckedProduct}
     onToggleCheck={action('onToggleCheck')}
     onDelete={action('onDelete')}
-    onAddAmount={action('onAddMount')}
-    onSubtractAmount={action('onSubtractAmount')}
+    onSetAmount={action('onSetAmount')}
   ></ProductItem>
 )

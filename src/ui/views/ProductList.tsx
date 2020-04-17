@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { addAmount } from '../../core/actions/addAmount'
 import { addNewProduct } from '../../core/actions/addNewProduct'
 import { deleteProduct } from '../../core/actions/deleteProduct'
 import { getList, List } from '../../core/actions/lists'
-import { subtractAmount } from '../../core/actions/subtractAmount'
+import { setAmount } from '../../core/actions/setAmount'
 import { toggleProductCheck } from '../../core/actions/toggleProductCheck'
 import { Product } from '../../core/model/product'
 import { useStickyState } from '../hooks/useStickyState'
@@ -71,8 +70,7 @@ export const ProductList: React.FC = () => {
             key={product.id}
             onToggleCheck={() => handleToggleProductCheck(product)}
             onDelete={() => deleteProduct(listId, product.id)}
-            onAddAmount={() => addAmount(listId, product)}
-            onSubtractAmount={() => subtractAmount(listId, product)}
+            onSetAmount={(amount) => setAmount(listId, product, amount)}
           />
         ))}
 
@@ -84,8 +82,7 @@ export const ProductList: React.FC = () => {
                 key={product.id}
                 onToggleCheck={() => handleToggleProductCheck(product)}
                 onDelete={() => deleteProduct(listId, product.id)}
-                onAddAmount={() => addAmount(listId, product)}
-                onSubtractAmount={() => subtractAmount(listId, product)}
+                onSetAmount={(amount) => setAmount(listId, product, amount)}
               />
             ))}
           </>

@@ -1,35 +1,29 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components/macro'
-import { sizes } from '../../../theme/size'
 import { Product } from '../../../../core/model/product/Product'
-import { ReactComponent as DeleteIconSvg } from './delete.svg'
+import { sizes } from '../../../theme/size'
+import { AmountOption } from './AmountOption'
 import { ReactComponent as CheckboxOnIconSvg } from './check_box.svg'
 import { ReactComponent as CheckboxOffIconSvg } from './check_box_outline_blank.svg'
-import { AmountOption } from './AmountOption'
+import { ReactComponent as DeleteIconSvg } from './delete.svg'
 
 interface Props {
   item: Product
   onToggleCheck: () => void
   onDelete: () => void
-  onAddAmount: () => void
-  onSubtractAmount: () => void
+  onSetAmount: (amount: number) => void
 }
 
 export const ProductItem: React.FC<Props> = ({
   item,
   onToggleCheck,
   onDelete,
-  onAddAmount,
-  onSubtractAmount,
+  onSetAmount,
 }) => (
   <Wrapper checked={item.checked}>
     <DeleteOption onClick={onDelete} />
     <ItemName>{item.name}</ItemName>
-    <AmountOption
-      amount={item.amount}
-      onAdd={onAddAmount}
-      onSubtract={onSubtractAmount}
-    />
+    <AmountOption amount={item.amount} onSet={onSetAmount} />
     <CheckOption checked={item.checked} onClick={onToggleCheck} />
   </Wrapper>
 )
@@ -42,9 +36,9 @@ const Wrapper = styled.div<{ checked: boolean }>`
   padding-bottom: ${sizes.extrasmall};
   user-select: none;
 
-  background-color: ${p => p.checked && '#eee'};
+  background-color: ${(p) => p.checked && '#eee'};
 
-  ${p =>
+  ${(p) =>
     p.checked &&
     css`
       color: gray;
