@@ -1,7 +1,6 @@
-import 'firebase/auth';
-
-import firebase from 'firebase/app';
-import React from 'react';
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import React from 'react'
 
 export const userContext = React.createContext<{
   user: firebase.User | null
@@ -18,7 +17,6 @@ const useAuth = () => {
   })
 
   function onChange(user: firebase.User | null) {
-    console.log('useAuth :: user', user)
     setState({ initializing: false, user })
   }
 
