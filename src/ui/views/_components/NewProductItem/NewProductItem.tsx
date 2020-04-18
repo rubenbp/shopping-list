@@ -1,22 +1,34 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components/macro'
 import { sizes } from '../../../theme/size'
+import { AmountOption } from '../AmountOption'
 import { ReactComponent as AddIconSvg } from './add_box.svg'
-import { AmountOption } from './AmountOption'
 
 interface Props {
   name: string
-  onAdd: () => void
+  onAdd: (amount: number) => void
 }
 
-export const NewProductItem: React.FC<Props> = ({ name, onAdd }) => (
-  <Wrapper>
-    <EmptyIcon />
-    <ItemName>{name}</ItemName>
-    <AmountOption amount={1} />
-    <AddOption onClick={onAdd} />
-  </Wrapper>
-)
+export const NewProductItem: React.FC<Props> = ({ name, onAdd }) => {
+  const [amount, setAmount] = React.useState(1)
+
+  const handleSetAmmount = (amount: number) => {
+    setAmount(amount)
+  }
+
+  const handleAdd = () => {
+    onAdd(amount)
+  }
+
+  return (
+    <Wrapper>
+      <EmptyIcon />
+      <ItemName>{name}</ItemName>
+      <AmountOption amount={amount} onSet={handleSetAmmount} />
+      <AddOption onClick={handleAdd} />
+    </Wrapper>
+  )
+}
 
 const Wrapper = styled.div`
   display: flex;

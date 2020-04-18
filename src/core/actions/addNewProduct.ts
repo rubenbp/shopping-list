@@ -1,12 +1,21 @@
 import { NewProduct } from '../model/product'
 import { addProduct } from '../model/product/Product.repository'
 
-export function addNewProduct(listId: string, name: string) {
+/**
+ * Añade un nuevo producto a la lista
+ * @returns Identificador del producto añadido
+ */
+export async function addNewProduct(
+  listId: string,
+  name: string,
+  amount: number,
+) {
   const newProduct: NewProduct = {
     name,
-    amount: 1,
+    amount: amount,
     checked: false,
   }
 
-  addProduct(listId, newProduct)
+  const productRef = await addProduct(listId, newProduct)
+  return productRef.id
 }

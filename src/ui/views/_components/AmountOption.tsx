@@ -2,7 +2,7 @@ import { MenuItem } from '@material-ui/core'
 import Menu from '@material-ui/core/Menu'
 import React from 'react'
 import styled from 'styled-components/macro'
-import { sizes } from '../../../theme/size'
+import { sizes } from '../../theme/size'
 
 interface Props {
   amount: number

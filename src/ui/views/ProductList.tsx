@@ -20,6 +20,7 @@ export const ProductList: React.FC = () => {
   const [term, setTerm] = useState('')
   const [currentList, setCurrentList] = useState<List>()
   const [, setDefaultList] = useStickyState(null, 'defaultList')
+  const [highlightItem, setHighlightItem] = useState<string | null>()
 
   // Almacena la lista que está siendo visitada
   useEffect(() => {
@@ -53,9 +54,18 @@ export const ProductList: React.FC = () => {
     }
   }
 
-  const handleAddProduct = () => {
-    addNewProduct(listId, term)
+  const handleAddProduct = async (amount: number) => {
     setTerm('')
+    setHighlightItem(null)
+    const newProductRef = await addNewProduct(listId, term, amount)
+    setHighlightItem(newProductRef)
+  }
+
+  const handleAddProductOnFilter = async () => {
+    setTerm('')
+    setHighlightItem(null)
+    const newProductRef = await addNewProduct(listId, term, 1)
+    setHighlightItem(newProductRef)
   }
 
   const hasProductFiltered =
@@ -71,6 +81,7 @@ export const ProductList: React.FC = () => {
             onToggleCheck={() => handleToggleProductCheck(product)}
             onDelete={() => deleteProduct(listId, product.id)}
             onSetAmount={(amount) => setAmount(listId, product, amount)}
+            isHighlight={highlightItem === product.id}
           />
         ))}
 
@@ -95,7 +106,7 @@ export const ProductList: React.FC = () => {
         <FilterProducts
           term={term}
           onSearch={handleSearch}
-          onAdd={handleAddProduct}
+          onAdd={handleAddProductOnFilter}
         />
       </>
     </AppBar>

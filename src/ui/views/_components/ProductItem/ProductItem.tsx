@@ -1,14 +1,15 @@
 import * as React from 'react'
-import styled, { css } from 'styled-components/macro'
+import styled, { css, keyframes } from 'styled-components/macro'
 import { Product } from '../../../../core/model/product/Product'
 import { sizes } from '../../../theme/size'
-import { AmountOption } from './AmountOption'
+import { AmountOption } from '../AmountOption'
 import { ReactComponent as CheckboxOnIconSvg } from './check_box.svg'
 import { ReactComponent as CheckboxOffIconSvg } from './check_box_outline_blank.svg'
 import { ReactComponent as DeleteIconSvg } from './delete.svg'
 
 interface Props {
   item: Product
+  isHighlight?: boolean
   onToggleCheck: () => void
   onDelete: () => void
   onSetAmount: (amount: number) => void
@@ -19,8 +20,9 @@ export const ProductItem: React.FC<Props> = ({
   onToggleCheck,
   onDelete,
   onSetAmount,
+  isHighlight = false,
 }) => (
-  <Wrapper checked={item.checked}>
+  <Wrapper checked={item.checked} isHighlight={isHighlight}>
     <DeleteOption onClick={onDelete} />
     <ItemName>{item.name}</ItemName>
     <AmountOption amount={item.amount} onSet={onSetAmount} />
@@ -28,7 +30,20 @@ export const ProductItem: React.FC<Props> = ({
   </Wrapper>
 )
 
-const Wrapper = styled.div<{ checked: boolean }>`
+const highlightAnimation = keyframes`
+  0% {
+    opacity: 0;
+  }
+  10%, 50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`
+
+const Wrapper = styled.div<{ checked: boolean; isHighlight: boolean }>`
+  position: relative;
   display: flex;
   align-items: center;
   height: ${sizes.large};
@@ -46,6 +61,26 @@ const Wrapper = styled.div<{ checked: boolean }>`
         fill: gray;
       }
     `}
+
+  &:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #74ebd5;
+    background-image: linear-gradient(45deg, #74ebd5 0%, #9face6 100%);
+
+    z-index: -1;
+    opacity: 0;
+
+    ${(p) =>
+      p.isHighlight &&
+      css`
+        animation: ${highlightAnimation} 1.5s forwards;
+      `}
+  }
 `
 
 const CheckOption: React.FC<{ checked: boolean; onClick: () => void }> = ({
