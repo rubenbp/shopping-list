@@ -37,5 +37,8 @@ export const reboot = css`
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    /* evita que se recargue la página al hacer scroll en la parte superior */
+    overscroll-behavior: contain;
   }
 `
