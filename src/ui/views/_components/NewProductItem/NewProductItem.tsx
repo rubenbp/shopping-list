@@ -13,7 +13,7 @@ export const NewProductItem: React.FC<Props> = ({ name, onAdd }) => (
   <Wrapper>
     <EmptyIcon />
     <ItemName>{name}</ItemName>
-    <AmountOption amount={1} onAdd={() => null} onSubtract={() => null} />
+    <AmountOption amount={1} />
     <AddOption onClick={onAdd} />
   </Wrapper>
 )
