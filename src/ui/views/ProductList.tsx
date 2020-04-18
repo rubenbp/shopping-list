@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { addNewProduct } from '../../core/actions/addNewProduct'
 import { deleteProduct } from '../../core/actions/deleteProduct'
@@ -21,6 +21,7 @@ export const ProductList: React.FC = () => {
   const [currentList, setCurrentList] = useState<List>()
   const [, setDefaultList] = useStickyState(null, 'defaultList')
   const [highlightItem, setHighlightItem] = useState<string | null>()
+  const filterRef = useRef<HTMLInputElement>(null)
 
   // Almacena la lista que está siendo visitada
   useEffect(() => {
@@ -49,23 +50,23 @@ export const ProductList: React.FC = () => {
 
   const handleToggleProductCheck = (product: Product) => {
     toggleProductCheck(listId, product)
-    if (product.checked) {
-      setTerm('')
+    if (term && filterRef) {
+      filterRef.current?.focus()
     }
+    setTerm('')
   }
 
   const handleAddProduct = async (amount: number) => {
+    const name = term
     setTerm('')
     setHighlightItem(null)
-    const newProductRef = await addNewProduct(listId, term, amount)
+    if (filterRef) filterRef.current?.focus()
+    const newProductRef = await addNewProduct(listId, name, amount)
     setHighlightItem(newProductRef)
   }
 
   const handleAddProductOnFilter = async () => {
-    setTerm('')
-    setHighlightItem(null)
-    const newProductRef = await addNewProduct(listId, term, 1)
-    setHighlightItem(newProductRef)
+    handleAddProduct(1)
   }
 
   const hasProductFiltered =
@@ -107,6 +108,7 @@ export const ProductList: React.FC = () => {
           term={term}
           onSearch={handleSearch}
           onAdd={handleAddProductOnFilter}
+          filterRef={filterRef}
         />
       </>
     </AppBar>

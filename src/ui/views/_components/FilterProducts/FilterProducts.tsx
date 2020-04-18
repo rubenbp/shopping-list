@@ -7,9 +7,15 @@ interface Props {
   term: string
   onSearch: (term: string) => void
   onAdd: () => void
+  filterRef?: React.RefObject<HTMLInputElement>
 }
 
-export const FilterProducts: React.FC<Props> = ({ term, onSearch, onAdd }) => {
+export const FilterProducts: React.FC<Props> = ({
+  term,
+  onSearch,
+  onAdd,
+  filterRef,
+}) => {
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSearch(event.target.value)
   }
@@ -24,6 +30,7 @@ export const FilterProducts: React.FC<Props> = ({ term, onSearch, onAdd }) => {
     <Wrapper>
       <Input
         type="text"
+        ref={filterRef}
         value={term}
         onChange={handleOnChange}
         onKeyPress={handleOnKeyPress}
