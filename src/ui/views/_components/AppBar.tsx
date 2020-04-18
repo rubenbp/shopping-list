@@ -1,5 +1,6 @@
 import MuiAppBar from '@material-ui/core/AppBar'
 import Avatar from '@material-ui/core/Avatar'
+import deepPurple from '@material-ui/core/colors/deepPurple'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import List from '@material-ui/core/List'
@@ -81,7 +82,10 @@ export const AppBar: React.FC<Props> = (props) => {
       >
         {!!user && (
           <>
-            <List dense>
+            <List
+              dense
+              style={{ backgroundColor: deepPurple[700], color: 'white' }}
+            >
               <ListItem>
                 <ListItemAvatar>
                   <Avatar src={user.photoURL || GenericAvatarImgUrl} />
@@ -89,7 +93,6 @@ export const AppBar: React.FC<Props> = (props) => {
                 <ListItemText primary={user.displayName} />
               </ListItem>
             </List>
-            <Divider />
             <List subheader={<ListSubheader>LISTAS</ListSubheader>}>
               {lists.map((list) => (
                 <ListItem key={list.id} button onClick={() => goToList(list)}>

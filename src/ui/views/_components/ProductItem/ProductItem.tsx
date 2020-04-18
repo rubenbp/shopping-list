@@ -1,3 +1,4 @@
+import { grey } from '@material-ui/core/colors'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import CheckboxOffIconSvg from '@material-ui/icons/CheckBoxOutlineBlankRounded'
 import CheckboxOnIconSvg from '@material-ui/icons/CheckBoxRounded'
@@ -65,10 +66,12 @@ const Wrapper = styled.div<{ checked: boolean; isHighlight: boolean }>`
   user-select: none;
 
   background-color: ${(p) => p.checked && '#eee'};
+  border-top: 1px solid ${grey[200]};
 
   ${(p) =>
     p.checked &&
     css`
+      border-top: 1px solid ${grey[300]};
       color: gray;
       svg {
         fill: gray;
@@ -101,9 +104,9 @@ const CheckOption: React.FC<{ checked: boolean; onClick: () => void }> = ({
   onClick,
 }) => {
   return checked ? (
-    <CheckboxOnIcon onClick={onClick} style={{ color: blueGrey[700] }} />
+    <CheckboxOnIcon onClick={onClick} style={{ color: blueGrey[200] }} />
   ) : (
-    <CheckboxOffIcon onClick={onClick} style={{ color: blueGrey[700] }} />
+    <CheckboxOffIcon onClick={onClick} style={{ color: blueGrey[200] }} />
   )
 }
 
