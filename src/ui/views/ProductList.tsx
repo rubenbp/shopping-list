@@ -74,6 +74,9 @@ export const ProductList: React.FC = () => {
   }
 
   const handleAddProductOnFilter = async () => {
+    if (term.trim().length === 0) {
+      return
+    }
     handleAddProduct(1)
   }
 
