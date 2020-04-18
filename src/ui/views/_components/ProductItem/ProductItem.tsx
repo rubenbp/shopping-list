@@ -15,6 +15,7 @@ interface Props {
   onToggleCheck: () => void
   onDelete: () => void
   onSetAmount: (amount: number) => void
+  isLast?: boolean
 }
 
 export const ProductItem: React.FC<Props> = ({
@@ -23,9 +24,10 @@ export const ProductItem: React.FC<Props> = ({
   onDelete,
   onSetAmount,
   isHighlight = false,
+  isLast = false,
 }) => {
   const ref = useRef<HTMLDivElement>(null)
-
+  console.log(isLast)
   // Cambia el scroll de la vista para que sea visible
   useEffect(() => {
     if (isHighlight && ref?.current) {
@@ -35,7 +37,12 @@ export const ProductItem: React.FC<Props> = ({
   }, [isHighlight])
 
   return (
-    <Wrapper ref={ref} checked={item.checked} isHighlight={isHighlight}>
+    <Wrapper
+      ref={ref}
+      checked={item.checked}
+      isHighlight={isHighlight}
+      isLast={isLast}
+    >
       <DeleteOption onClick={onDelete} />
       <ItemName>{item.name}</ItemName>
       <AmountOption amount={item.amount} onSet={onSetAmount} />
@@ -56,7 +63,12 @@ const highlightAnimation = keyframes`
   }
 `
 
-const Wrapper = styled.div<{ checked: boolean; isHighlight: boolean }>`
+interface WrapperProps {
+  checked: boolean
+  isHighlight: boolean
+  isLast: boolean
+}
+const Wrapper = styled.div<WrapperProps>`
   position: relative;
   display: flex;
   align-items: center;
@@ -66,15 +78,15 @@ const Wrapper = styled.div<{ checked: boolean; isHighlight: boolean }>`
   user-select: none;
 
   background-color: ${(p) => p.checked && '#eee'};
-  border-top: 1px solid ${grey[200]};
+  border-bottom: 1px solid ${grey[200]};
 
   ${(p) =>
     p.checked &&
     css`
-      border-top: 1px solid ${grey[300]};
-      color: gray;
+      border-bottom: ${!p.isLast && `1px solid ${grey[300]}`};
+      color: ${grey[500]};
       svg {
-        fill: gray;
+        fill: ${grey[400]};
       }
     `}
 

@@ -1,3 +1,4 @@
+import ListSubheader from '@material-ui/core/ListSubheader'
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { addNewProduct } from '../../core/actions/addNewProduct'
@@ -99,13 +100,19 @@ export const ProductList: React.FC = () => {
 
         {checkedProductsFiltered.length > 0 && (
           <>
-            {checkedProductsFiltered.map((product) => (
+            <ListSubheader
+              style={{ fontSize: '0.7rem', textTransform: 'uppercase' }}
+            >
+              Comprado
+            </ListSubheader>
+            {checkedProductsFiltered.map((product, index) => (
               <ProductItem
                 item={product}
                 key={product.id}
                 onToggleCheck={() => handleToggleProductCheck(product)}
                 onDelete={() => deleteProduct(listId, product.id)}
                 onSetAmount={(amount) => setAmount(listId, product, amount)}
+                isLast={index === checkedProductsFiltered.length - 1}
               />
             ))}
           </>
