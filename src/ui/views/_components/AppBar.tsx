@@ -46,9 +46,14 @@ export const AppBar: React.FC<Props> = (props) => {
   const { user } = useSession()
 
   useEffect(() => {
+    let isMounted = true
     getLists(user!, (lists) => {
+      if (!isMounted) return
       setLists(lists)
     })
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   function handleLogout() {

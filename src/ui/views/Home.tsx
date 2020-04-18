@@ -16,9 +16,15 @@ export const Home = () => {
   const { user } = useSession()
 
   useEffect(() => {
+    let isMounted = true
     getLists(user!, (lists) => {
-      setLists(lists)
+      if (isMounted) {
+        setLists(lists)
+      }
     })
+    return () => {
+      isMounted = false
+    }
   }, [user])
 
   return (

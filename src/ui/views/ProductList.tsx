@@ -30,7 +30,13 @@ export const ProductList: React.FC = () => {
 
   // Obtiene los elementos de la lista
   useEffect(() => {
-    getList(listId).then((list) => setCurrentList(list))
+    let isMounted = true
+    getList(listId).then((list) => {
+      if (isMounted) setCurrentList(list)
+    })
+    return () => {
+      isMounted = false
+    }
   }, [listId])
 
   const handleSearch = (term: string): void => {

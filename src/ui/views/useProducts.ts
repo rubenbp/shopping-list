@@ -21,7 +21,10 @@ export const useProducts = (listId: string) => {
   })
 
   useEffect(() => {
+    let isMounted = true
     getProducts(listId, (items) => {
+      if (!isMounted) return
+
       const checkedProducts = items
         .filter(isProductChecked)
         .sort(sortProductsAlphabetical)
@@ -36,6 +39,9 @@ export const useProducts = (listId: string) => {
         loading: false,
       })
     })
+    return () => {
+      isMounted = false
+    }
   }, [listId])
 
   return products
