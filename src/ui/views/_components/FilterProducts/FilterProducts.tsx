@@ -42,7 +42,7 @@ export const FilterProducts: React.FC<Props> = ({
           </InputAdornment>
         }
       />
-      <ClearIcon onClick={() => onSearch('')} />
+      {term?.length > 0 && <ClearIcon onClick={() => onSearch('')} />}
     </Wrapper>
   )
 }
