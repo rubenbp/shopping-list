@@ -1,3 +1,4 @@
+import DeleteIconSvg from '@material-ui/icons/Delete'
 import React, { useEffect, useRef } from 'react'
 import styled, { css, keyframes } from 'styled-components/macro'
 import { Product } from '../../../../core/model/product/Product'
@@ -5,7 +6,6 @@ import { sizes } from '../../../theme/size'
 import { AmountOption } from '../AmountOption'
 import { ReactComponent as CheckboxOnIconSvg } from './check_box.svg'
 import { ReactComponent as CheckboxOffIconSvg } from './check_box_outline_blank.svg'
-import { ReactComponent as DeleteIconSvg } from './delete.svg'
 
 interface Props {
   item: Product
@@ -113,7 +113,7 @@ const ItemName = styled.div`
 const iconStyles = css`
   width: ${sizes.large};
   height: ${sizes.large};
-  padding: ${sizes.small};
+  padding: 0.9rem;
 `
 
 const DeleteOption = styled(DeleteIconSvg)`
