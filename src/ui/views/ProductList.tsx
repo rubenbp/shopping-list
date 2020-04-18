@@ -49,9 +49,11 @@ export const ProductList: React.FC = () => {
   )
 
   const handleToggleProductCheck = (product: Product) => {
+    setHighlightItem(null)
     toggleProductCheck(listId, product)
     if (term && filterRef) {
       filterRef.current?.focus()
+      setHighlightItem(product.id)
     }
     setTerm('')
   }

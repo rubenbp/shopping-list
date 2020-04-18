@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled, { css, keyframes } from 'styled-components/macro'
 import { Product } from '../../../../core/model/product/Product'
 import { sizes } from '../../../theme/size'
@@ -21,14 +21,26 @@ export const ProductItem: React.FC<Props> = ({
   onDelete,
   onSetAmount,
   isHighlight = false,
-}) => (
-  <Wrapper checked={item.checked} isHighlight={isHighlight}>
-    <DeleteOption onClick={onDelete} />
-    <ItemName>{item.name}</ItemName>
-    <AmountOption amount={item.amount} onSet={onSetAmount} />
-    <CheckOption checked={item.checked} onClick={onToggleCheck} />
-  </Wrapper>
-)
+}) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  // Cambia el scroll de la vista para que sea visible
+  useEffect(() => {
+    if (isHighlight && ref?.current) {
+      const scrollTo = ref.current.offsetTop - 56
+      window.scrollTo(0, scrollTo)
+    }
+  }, [isHighlight])
+
+  return (
+    <Wrapper ref={ref} checked={item.checked} isHighlight={isHighlight}>
+      <DeleteOption onClick={onDelete} />
+      <ItemName>{item.name}</ItemName>
+      <AmountOption amount={item.amount} onSet={onSetAmount} />
+      <CheckOption checked={item.checked} onClick={onToggleCheck} />
+    </Wrapper>
+  )
+}
 
 const highlightAnimation = keyframes`
   0% {
