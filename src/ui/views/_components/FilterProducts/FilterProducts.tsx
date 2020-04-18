@@ -1,3 +1,4 @@
+import { blueGrey } from '@material-ui/core/colors'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import InputBase from '@material-ui/core/InputBase'
 import FilterListIcon from '@material-ui/icons/FilterList'
@@ -38,7 +39,7 @@ export const FilterProducts: React.FC<Props> = ({
         fullWidth
         startAdornment={
           <InputAdornment position="start">
-            <FilterListIcon />
+            <FilterListIcon style={{ color: blueGrey[400] }} />
           </InputAdornment>
         }
       />

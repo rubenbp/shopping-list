@@ -32,7 +32,6 @@ export const reboot = css`
   body {
     font-size: 100%;
     font-family: Roboto, Arial;
-    color: #444;
     text-align: left; /* 3 */
     background-color: white; /* 2 */
 

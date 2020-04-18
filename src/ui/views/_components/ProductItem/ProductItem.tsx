@@ -1,11 +1,12 @@
-import DeleteIconSvg from '@material-ui/icons/Delete'
+import blueGrey from '@material-ui/core/colors/blueGrey'
+import CheckboxOffIconSvg from '@material-ui/icons/CheckBoxOutlineBlankRounded'
+import CheckboxOnIconSvg from '@material-ui/icons/CheckBoxRounded'
+import DeleteIconSvg from '@material-ui/icons/DeleteForever'
 import React, { useEffect, useRef } from 'react'
 import styled, { css, keyframes } from 'styled-components/macro'
 import { Product } from '../../../../core/model/product/Product'
 import { sizes } from '../../../theme/size'
 import { AmountOption } from '../AmountOption'
-import { ReactComponent as CheckboxOnIconSvg } from './check_box.svg'
-import { ReactComponent as CheckboxOffIconSvg } from './check_box_outline_blank.svg'
 
 interface Props {
   item: Product
@@ -81,8 +82,8 @@ const Wrapper = styled.div<{ checked: boolean; isHighlight: boolean }>`
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: #74ebd5;
-    background-image: linear-gradient(45deg, #74ebd5 0%, #9face6 100%);
+    background-color: #21d4fd;
+    background-image: linear-gradient(59deg, #21d4fd 0%, #8e54f7 100%);
 
     z-index: -1;
     opacity: 0;
@@ -100,9 +101,9 @@ const CheckOption: React.FC<{ checked: boolean; onClick: () => void }> = ({
   onClick,
 }) => {
   return checked ? (
-    <CheckboxOnIcon onClick={onClick} />
+    <CheckboxOnIcon onClick={onClick} style={{ color: blueGrey[700] }} />
   ) : (
-    <CheckboxOffIcon onClick={onClick} />
+    <CheckboxOffIcon onClick={onClick} style={{ color: blueGrey[700] }} />
   )
 }
 
@@ -111,13 +112,16 @@ const ItemName = styled.div`
 `
 
 const iconStyles = css`
-  width: ${sizes.large};
-  height: ${sizes.large};
-  padding: 0.9rem;
+  && {
+    width: ${sizes.large};
+    height: ${sizes.large};
+    padding: 0.9rem;
+  }
 `
 
 const DeleteOption = styled(DeleteIconSvg)`
   ${iconStyles};
+  color: #d68080;
 `
 
 const CheckboxOnIcon = styled(CheckboxOnIconSvg)`
