@@ -1,8 +1,10 @@
+import InputAdornment from '@material-ui/core/InputAdornment'
+import InputBase from '@material-ui/core/InputBase'
+import FilterListIcon from '@material-ui/icons/FilterList'
 import * as React from 'react'
 import styled, { css } from 'styled-components/macro'
 import { sizes } from '../../../theme/size'
 import { ReactComponent as ClearIconSvg } from './clear.svg'
-
 interface Props {
   term: string
   onSearch: (term: string) => void
@@ -28,12 +30,17 @@ export const FilterProducts: React.FC<Props> = ({
 
   return (
     <Wrapper>
-      <Input
-        type="text"
+      <InputBase
         ref={filterRef}
         value={term}
         onChange={handleOnChange}
         onKeyPress={handleOnKeyPress}
+        fullWidth
+        startAdornment={
+          <InputAdornment position="start">
+            <FilterListIcon />
+          </InputAdornment>
+        }
       />
       <ClearIcon onClick={() => onSearch('')} />
     </Wrapper>
@@ -47,18 +54,12 @@ const Wrapper = styled.div`
   right: 0;
 
   display: flex;
+  align-items: center;
   height: ${sizes.large};
+  padding-left: 10px;
+
   box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background-color: white;
-`
-
-const Input = styled.input`
-  flex-grow: 1;
-  padding: ${sizes.small};
-
-  font-size: 1rem;
-  border: none;
-  outline: none;
 `
 
 const iconStyles = css`
