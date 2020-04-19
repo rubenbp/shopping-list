@@ -97,7 +97,7 @@ export const AppBar: React.FC<Props> = (props) => {
                 <ListItemText primary={user.displayName} />
               </ListItem>
             </List>
-            <List subheader={<ListSubheader>LISTAS</ListSubheader>}>
+            <List dense subheader={<ListSubheader>LISTAS</ListSubheader>}>
               {lists.map((list) => (
                 <ListItem key={list.id} button onClick={() => goToList(list)}>
                   <ListItemIcon>
