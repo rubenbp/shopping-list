@@ -1,8 +1,8 @@
 import firebase from 'firebase/app'
-import 'firebase/auth'
 import React, { useState } from 'react'
+import { getCurrentUser, onAuthStateChanged } from '../infraestructure/auth'
 
-export const UserContext = React.createContext<{
+export const SessionContext = React.createContext<{
   user: firebase.User | null
   initializing: boolean
 }>({
@@ -10,20 +10,22 @@ export const UserContext = React.createContext<{
   initializing: true,
 })
 
-export const UserProvider: React.FC = ({ children }) => {
+export const SessionProvider: React.FC = ({ children }) => {
   const [state, setState] = useState(() => {
-    const user = firebase.auth().currentUser
+    const user = getCurrentUser()
     return { initializing: !user, user }
   })
 
   React.useEffect(() => {
     // listen for auth state changes
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged((user) => {
       setState({ initializing: false, user })
     })
     // unsubscribe to the listener when unmounting
     return () => unsubscribe()
   }, [])
 
-  return <UserContext.Provider value={state}>{children}</UserContext.Provider>
+  return (
+    <SessionContext.Provider value={state}>{children}</SessionContext.Provider>
+  )
 }
