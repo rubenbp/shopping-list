@@ -1,5 +1,5 @@
-import { NewProduct } from '../model/product'
-import { addProduct } from '../model/product/Product.repository'
+import { NewProduct } from '../../model/product'
+import { addProduct } from '../../model/product/Product.repository'
 
 /**
  * Añade un nuevo producto a la lista

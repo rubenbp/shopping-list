@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getProducts } from '../../core/actions/getProducts'
+import { getProducts } from '../../core/actions/product/getProducts'
 import {
   isProductChecked,
   isProductUnchecked,
