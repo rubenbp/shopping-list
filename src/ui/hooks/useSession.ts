@@ -1,8 +1,7 @@
-import { useContext } from 'react';
-
-import { userContext } from '../infraestructure/UserContext';
+import { useContext } from 'react'
+import { UserContext } from '../infraestructure/UserContext'
 
 export const useSession = () => {
-  const { user, initializing } = useContext(userContext)
+  const { user, initializing } = useContext(UserContext)
   return { user, initializing }
 }
