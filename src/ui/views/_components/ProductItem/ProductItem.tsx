@@ -26,7 +26,6 @@ export const ProductItem: React.FC<Props> = ({
   isLast = false,
 }) => {
   const ref = useRef<HTMLDivElement>(null)
-  console.log(isLast)
   // Cambia el scroll de la vista para que sea visible
   useEffect(() => {
     if (isHighlight && ref?.current) {
