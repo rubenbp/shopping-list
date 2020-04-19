@@ -1,5 +1,8 @@
-export interface Product extends NewProduct {
+export interface Product {
   id: string
+  name: string
+  amount: number
+  checked: boolean
 }
 
 export interface NewProduct {
