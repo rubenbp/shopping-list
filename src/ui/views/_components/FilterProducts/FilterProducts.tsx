@@ -1,6 +1,5 @@
+import { InputAdornment, TextField } from '@material-ui/core'
 import { blueGrey } from '@material-ui/core/colors'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import * as React from 'react'
 import styled, { css } from 'styled-components/macro'

@@ -1,8 +1,12 @@
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import Container from '@material-ui/core/Container'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
+import {
+  Box,
+  Button,
+  Container,
+  createStyles,
+  makeStyles,
+  TextField,
+  Theme,
+} from '@material-ui/core'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { addNewList } from '../../core/actions/lists/addNewList'

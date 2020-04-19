@@ -1,5 +1,4 @@
-import { MenuItem } from '@material-ui/core'
-import Menu from '@material-ui/core/Menu'
+import { Menu, MenuItem } from '@material-ui/core'
 import React from 'react'
 import styled from 'styled-components/macro'
 import { sizes } from '../../theme/size'

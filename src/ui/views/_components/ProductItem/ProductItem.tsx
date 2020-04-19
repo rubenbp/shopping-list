@@ -1,5 +1,4 @@
-import { grey } from '@material-ui/core/colors'
-import blueGrey from '@material-ui/core/colors/blueGrey'
+import { blueGrey, grey } from '@material-ui/core/colors'
 import CheckboxOffIconSvg from '@material-ui/icons/CheckBoxOutlineBlankRounded'
 import CheckboxOnIconSvg from '@material-ui/icons/CheckBoxRounded'
 import DeleteIconSvg from '@material-ui/icons/DeleteForever'

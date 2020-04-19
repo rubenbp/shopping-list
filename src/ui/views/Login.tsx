@@ -1,6 +1,4 @@
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
+import { Box, Button, Typography } from '@material-ui/core'
 import HowToRegIcon from '@material-ui/icons/HowToReg'
 import React from 'react'
 import styled from 'styled-components/macro'

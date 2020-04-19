@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
-const { override, addWebpackPlugin } = require('customize-cra')
+const { override, addWebpackPlugin, useBabelRc } = require('customize-cra')
 const argv = require('yargs').argv
 
 module.exports = function overrideOriginal(config, env) {
@@ -22,5 +24,5 @@ module.exports = function overrideOriginal(config, env) {
     extensions.push(addWebpackPlugin(bundleAnalyzerPlugin))
   }
 
-  return override(...extensions)(config, env)
+  return override(...extensions, useBabelRc())(config, env)
 }
